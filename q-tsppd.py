@@ -1,6 +1,6 @@
 from service.Menu import Menu
 from handler.MenuHandler import MenuHandler
-from database import database
+from node import Node
 
 if __name__ == '__main__':
 
@@ -13,13 +13,14 @@ if __name__ == '__main__':
 	print(' //******* **          /**     ******** /**      /**      /*******  ')
 	print('  /////// //           //     ////////  //       //       ///////   ')
 
-	DB_FILE = 'tsp.db'
-
-	if not database.exist(DB_FILE):
-		database.create_database(DB_FILE)
-	else:
-		database.reset_database(DB_FILE)
-
-	database.fill_seeds(DB_FILE)
-
+	# read nodes file
+	nodes = []
+	f = open('nodes.txt', 'r')
+	for line in f:
+		parts = line.split()
+		# print(parts)
+		nodes.append(Node.Node(int(parts[0]), float(parts[1]), float(parts[2])))
+	# for node in nodes:
+	# print(node)
+	# print('ok lettura file nodi')
 	Menu(MenuHandler()).show()
