@@ -11,7 +11,7 @@ class Node:
         self.q_d = q_d
 
     def __str__(self):
-        out = str(self.id) + " {} {} ".format(self.x, self.y)
+        out = str(self.id) + " {} {} {} {} ".format(self.x, self.y, self.q_p, self.q_d)
         return out
 
 
