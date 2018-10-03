@@ -39,11 +39,12 @@ if __name__ == '__main__':
 
 	# upgrade nodes list
 	for node in nodes:
-		for transfer in transfers:
-			if transfer[0] == node.id:
-				node.q_p = node.q_p + transfer[2]
-			elif transfer[1] == node.id:
-				node.q_d = node.q_d + transfer[2]
+		if node.id != 0:
+			for transfer in transfers:
+				if transfer[0] == node.id:
+					node.q_p = node.q_p + transfer[2]
+				elif transfer[1] == node.id:
+					node.q_d = node.q_d + transfer[2]
 	# for node in nodes:
 	# print(node)
 
