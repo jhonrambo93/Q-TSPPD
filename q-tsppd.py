@@ -23,4 +23,31 @@ if __name__ == '__main__':
 	# for node in nodes:
 	# print(node)
 	# print('ok lettura file nodi')
+	f.close()
+
+	# read transfers file
+	transfers = []
+	f = open('transfers.txt', 'r')
+	for line in f:
+		parts = line.split()
+		# print(parts)
+		transfers.append((int(parts[0]), int(parts[1]), int(parts[2])))
+	# for node in nodes:
+	# print(node)
+	# print('ok lettura file nodi')
+	f.close()
+
+	# upgrade nodes list
+	for node in nodes:
+		for transfer in transfers:
+			if transfer[0] == node.id:
+				node.q_p = node.q_p + transfer[2]
+			elif transfer[1] == node.id:
+				node.q_d = node.q_d + transfer[2]
+	# for node in nodes:
+	# print(node)
+
+	# greedy least distance
+
+
 	Menu(MenuHandler()).show()
