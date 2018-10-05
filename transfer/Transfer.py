@@ -1,7 +1,7 @@
 
 
 class Transfer:
-    def __init__(self, id_p: int , id_d: int, q:int, delivered: bool):
+    def __init__(self, id_p: int, id_d: int, q: int, delivered: bool):
         self.id_p = id_p
         self.id_d = id_d
         self.q = q
