@@ -24,7 +24,7 @@ class Menu:
 
 			if choice in {'1', '2', '3', '4'}:
 				if choice == '1':
-					command = ''
+					command = 'GREEDY'
 				elif choice == '2':
 					command = ''
 				elif choice == '3':
