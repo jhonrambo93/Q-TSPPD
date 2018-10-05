@@ -48,7 +48,11 @@ class MenuHandler:
 			# scarico il furgone della quantità del nodo corrente, se deve ricevere dal nodo corrente
 
 			for t in AppData.transfers:
-				pass
+				if (t.id_d == n_c.id) and (t.delivered == False):
+					pass
+					# if t.id_p è nella lista dei nodi da cui ho prelevato
+					# allora q = q - t_q , t.q = 0 e t.delivered = True
+
 			for node in solution:
 				if (n_c.q_d != 0):
 					q = q - n_c.q_d # sarebbe q = q + n_c.q_p, l'ho scritto il modo più sintetico

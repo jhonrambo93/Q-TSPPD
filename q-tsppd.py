@@ -34,7 +34,7 @@ if __name__ == '__main__':
 	for line in f:
 		parts = line.split()
 		# print(parts)
-		AppData.transfers.append(Transfer(int(parts[0]), int(parts[1]), int(parts[2])))
+		AppData.transfers.append(Transfer(int(parts[0]), int(parts[1]), int(parts[2]), False))
 	# for node in nodes:
 	# print(node)
 	# print('ok lettura file nodi')
@@ -44,10 +44,10 @@ if __name__ == '__main__':
 	for node in AppData.nodes:
 		if node.id != 0:
 			for transfer in AppData.transfers:
-				if transfer[0] == node.id:
-					node.q_p = node.q_p + transfer[2]
-				elif transfer[1] == node.id:
-					node.q_d = node.q_d + transfer[2]
+				if transfer.id_p == node.id:
+					node.q_p = node.q_p + transfer.q
+				elif transfer.id_d == node.id:
+					node.q_d = node.q_d + transfer.q
 	# for node in AppData.nodes:
 	# print(node)
 
