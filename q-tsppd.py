@@ -2,7 +2,7 @@ from service.AppData import AppData
 from service.Menu import Menu
 from handler.MenuHandler import MenuHandler
 from node.Node import Node
-from service.Transfer import Transfer
+from transfer.Transfer import Transfer
 
 
 if __name__ == '__main__':

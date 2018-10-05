@@ -1,6 +1,5 @@
 from service.AppData import AppData
 from node.Node import Node
-from service.Transfer import Transfer
 import math
 
 
