@@ -11,4 +11,6 @@ class AppData:
     # capacity vehicle
     Q = 5
 
+    # quantità corrente
+    q_d_n = 0
 
