@@ -27,7 +27,8 @@ if __name__ == '__main__':
 	f.close()
 
 	# read transfers file
-	f = open('transfers.txt', 'r')
+	# f = open('transfers.txt', 'r')
+	f = open('transfers2.txt', 'r')
 	for line in f:
 		parts = line.split()
 		# print(parts)

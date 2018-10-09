@@ -14,6 +14,7 @@ class MenuHandler:
 
 		if choice == "GREEDY":
 			# init
+			step = 0
 			border = []
 			solution = []
 			nodes_in_solution = []
@@ -49,11 +50,13 @@ class MenuHandler:
 
 			# Other steps
 			while utils.complete_deliveries(total_deliveries):
-
+				step += 1
+				print('Step ' + str(step))
 				for node in AppData.nodes:
 					if node.id != 0 and node.id != AppData.current_node.id and utils.abmissibility_greedy(node, load, nodes_in_solution):
 						border.append(node)
 
+				# to avoid deadlock
 				if not border:
 					for node in AppData.nodes:
 						if node.id != AppData.current_node.id and node.q_p != 0:
@@ -71,8 +74,7 @@ class MenuHandler:
 				if nearest_n not in nodes_in_solution:
 					nodes_in_solution.append(nearest_n)
 				minimum_length = None
-				# print("nodo più vicino scelto:")
-				# print(nearest_n)
+				print("nodo più vicino scelto:" + str(nearest_n))
 				print('Nodi prima di modifica di q:')
 				for node in AppData.nodes:
 					print(node)
@@ -108,10 +110,11 @@ class MenuHandler:
 			solution.append(AppData.nodes[0])
 			# risultato soluzione
 			print('Distanza totale:' + str(AppData.total_length))
-
 			print('Nodi nella soluzione:')
 			for node in solution:
 				print(node)
+			# reset risultato
+			AppData.total_length = 0
 
 		if choice == "":
 			pass
