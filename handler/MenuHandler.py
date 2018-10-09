@@ -13,7 +13,7 @@ def abmissibility_greedy(node: Node, q: int, nodes_in_solution: list) -> bool:
 		return False
 	else:
 		# Se metto < invece di <= siamo nel caso in cui il bordo non viene creato, risolvere il problema!???
-		if is_destination(node, nodes_in_solution) and q-AppData.q_d_n+node.q_p <= AppData.Q:
+		if (is_destination(node, nodes_in_solution)) and (q-AppData.q_d_n+node.q_p <= AppData.Q):
 			return True
 		else:
 			return False
@@ -30,12 +30,8 @@ def is_destination(node: Node, nodes_in_solution: list) -> bool:
 	return False
 
 
-def end_greedy() -> bool:
-	complete_deliver = 0
-	for transfer in AppData.transfers:
-		if transfer.delivered is True:
-			complete_deliver = complete_deliver + 1
-	if len(AppData.transfers) == complete_deliver:
+def complete_deliveries(total_deliveries: int) -> bool:
+	if len(AppData.transfers) == total_deliveries:
 		return False
 	else:
 		return True
@@ -56,6 +52,7 @@ class MenuHandler:
 			border = []
 			solution = []
 			nodes_in_solution = []
+			total_deliveries = 0
 			solution.append(n_c)
 			min_l = None
 			nearest_n = None
@@ -65,6 +62,10 @@ class MenuHandler:
 			for node in AppData.nodes:
 				if node.q_p != 0:
 					border.append(node)
+
+			for node in border:
+				print(node)
+
 			print("stampo lunghezze tra i nodi dal nodo corrente")
 			for n_f in border:
 				l = lenght(n_c, n_f)
@@ -80,16 +81,20 @@ class MenuHandler:
 			min_l = None
 			nodes_in_solution.append(nearest_n)
 			# carico il furgone della quantità del nodo corrente, se possibile
-			if (q + n_c.q_p) < AppData.Q:
+			if (q + n_c.q_p) <= AppData.Q:
 				q += n_c.q_p
 				AppData.nodes[n_c.id].q_p = 0
+
+			print("nodo corrente:")
+			print(n_c)
 			print('Quantità nel furgone, al primo carico dopo il nodo 0')
 			print(q)
+
 
 			border.clear()
 
 			# Other steps
-			while end_greedy():
+			while complete_deliveries(total_deliveries):
 
 				for node in AppData.nodes:
 					if node.id != 0 and node.id != n_c.id and abmissibility_greedy(node, q, nodes_in_solution):
@@ -128,24 +133,32 @@ class MenuHandler:
 					print(node)
 
 				# scarico il furgone della quantità del nodo corrente, se deve ricevere dal nodo corrente
-				for s in solution:
+				for s in nodes_in_solution:
 					for t in AppData.transfers:
 						if (t.id_d == n_c.id) and (t.delivered is False) and (t.id_p == s.id):
 							q = q - t.q  # scarico il furgone della quantità
 							AppData.nodes[n_c.id].q_d = AppData.nodes[n_c.id].q_d - t.q  # decremento della quantità t.q nella lista dei nodi
 							t.q = 0
 							t.delivered = True
+							total_deliveries = total_deliveries + 1
 
 				# carico il furgone della quantità del nodo corrente, se possibile
+
 				q += n_c.q_p
-				AppData.nodes[n_c.id].q_p = 0
+				if q <= AppData.Q:
+					AppData.nodes[n_c.id].q_p = 0
+				else:
+					scarto = q - AppData.Q
+					q = q - scarto
+					AppData.nodes[n_c.id].q_p = scarto
+
 
 				print('Nodo corrente, prima di ripetere il while')
 				print(n_c)
 				print('Quantità nel furgone')
 				print(q)
 
-				print("pulizia del bordo altrimenti rimangono altri nodi come minimo")
+				# pulizia del bordo altrimenti rimangono altri nodi come minimo
 				border.clear()
 
 			# ritorno al deposito
