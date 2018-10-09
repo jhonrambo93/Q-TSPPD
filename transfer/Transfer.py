@@ -8,6 +8,6 @@ class Transfer:
         self.delivered = delivered
 
     def __str__(self):
-        out = str(self.id) + " {} {} {} {} ".format(self.id_p, self.id_d, self.q, self.delivered)
+        out = " {} {} {} {} ".format(self.id_p, self.id_d, self.q, self.delivered)
         return out
 

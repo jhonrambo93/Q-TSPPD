@@ -17,7 +17,6 @@ if __name__ == '__main__':
 	print('  /////// //           //     ////////  //       //       ///////   ')
 
 	# read nodes file
-	# nodes = []
 	f = open('nodes.txt', 'r')
 	for line in f:
 		parts = line.split()
@@ -25,11 +24,9 @@ if __name__ == '__main__':
 		AppData.nodes.append(Node(int(parts[0]), float(parts[1]), float(parts[2])))
 	# for node in AppData.nodes:
 	# print(node)
-	# print('ok lettura file nodi')
 	f.close()
 
 	# read transfers file
-	# transfers = []
 	f = open('transfers.txt', 'r')
 	for line in f:
 		parts = line.split()
@@ -37,7 +34,6 @@ if __name__ == '__main__':
 		AppData.transfers.append(Transfer(int(parts[0]), int(parts[1]), int(parts[2]), False))
 	# for node in nodes:
 	# print(node)
-	# print('ok lettura file nodi')
 	f.close()
 
 	# upgrade nodes list

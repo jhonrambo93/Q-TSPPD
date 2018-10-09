@@ -11,11 +11,11 @@ class AppData:
     # capacity vehicle
     capacity = 5
 
-    # quantità corrente
+    # quantità effettiva da scaricare
     q_d_n = 0
 
     # nodo corrente che inizialmente è il nodo 0
-    current_node = nodes[0]
+    current_node = None
 
-    # total lenght
-    total_lenght = 0
+    # total length
+    total_length = 0

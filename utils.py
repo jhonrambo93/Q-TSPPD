@@ -41,16 +41,16 @@ def complete_deliveries(total_deliveries: int) -> bool:
 
 
 # funzione che trova il nodo più vicino
-def get_nearest_node(border: list, minimum_lenght) -> float:
+def get_nearest_node(border: list, minimum_length) -> float:
 	for n_f in border:
 		l = lenght(AppData.current_node, n_f)
 		print(l)
-		if minimum_lenght is None:
-			minimum_lenght = l
+		if minimum_length is None:
+			minimum_length = l
 			nearest_n = n_f
-		elif l < minimum_lenght:
-			minimum_lenght = l
+		elif l < minimum_length:
+			minimum_length = l
 			nearest_n = n_f
 	AppData.current_node = nearest_n
-	AppData.total_lenght += minimum_lenght
+	AppData.total_length += minimum_length
 	return nearest_n

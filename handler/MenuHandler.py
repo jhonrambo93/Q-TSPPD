@@ -18,8 +18,9 @@ class MenuHandler:
 			solution = []
 			nodes_in_solution = []
 			total_deliveries = 0
+			AppData.current_node = AppData.nodes[0]
 			solution.append(AppData.current_node)
-			minimum_lenght = None
+			minimum_length = None
 			load = 0  # carico nel furgone
 
 			# first step
@@ -32,16 +33,16 @@ class MenuHandler:
 
 			print('Distanze nodi frontiera dal nodo 0:')
 			# trovo il nodo più vicino
-			nearest_n = utils.get_nearest_node(border, minimum_lenght)
+			nearest_n = utils.get_nearest_node(border, minimum_length)
 			solution.append(nearest_n)
 			nodes_in_solution.append(nearest_n)
-			minimum_lenght = None
+			minimum_length = None
 			# carico il furgone della quantità del nodo corrente, se possibile
 			if (load + AppData.current_node.q_p) <= AppData.capacity:
 				load += AppData.current_node.q_p
 				AppData.nodes[AppData.current_node.id].q_p = 0
 
-			print('Nodo corrente:' + AppData.current_node)
+			print('Nodo corrente:' + str(AppData.current_node))
 			print('Quantità nel furgone, al primo carico dopo il nodo 0:' + str(load))
 
 			border.clear()
@@ -65,11 +66,11 @@ class MenuHandler:
 
 				print('Distanze nodi frontiera dal nodo corrente:')
 				# trovo il nodo più vicino
-				nearest_n = utils.get_nearest_node(border, minimum_lenght)
+				nearest_n = utils.get_nearest_node(border, minimum_length)
 				solution.append(nearest_n)
 				if nearest_n not in nodes_in_solution:
 					nodes_in_solution.append(nearest_n)
-				minimum_lenght = None
+				minimum_length = None
 				# print("nodo più vicino scelto:")
 				# print(nearest_n)
 				print('Nodi prima di modifica di q:')
@@ -79,7 +80,7 @@ class MenuHandler:
 				# scarico il furgone della quantità del nodo corrente, se deve ricevere dal nodo corrente
 				for s in nodes_in_solution:
 					for t in AppData.transfers:
-						if (t.id_d == AppData.current_node.id) and (t.delivered is False) and (t.id_p == s):
+						if (t.id_d == AppData.current_node.id) and (t.delivered is False) and (t.id_p == s.id):
 							load = load - t.q  # scarico il furgone della quantità
 							# decremento della quantità t.q nella lista dei nodi
 							AppData.nodes[AppData.current_node.id].q_d = AppData.nodes[AppData.current_node.id].q_d - t.q
@@ -97,7 +98,7 @@ class MenuHandler:
 					load = load - scarto
 					AppData.nodes[AppData.current_node.id].q_p = scarto
 
-				print('Nodo corrente, prima di ripetere il while:' + AppData.current_node)
+				print('Nodo corrente, prima di ripetere il while:' + str(AppData.current_node))
 				print('Quantità nel furgone:' + str(load))
 
 				# pulizia del bordo altrimenti rimangono altri nodi come minimo
@@ -106,7 +107,7 @@ class MenuHandler:
 			# ritorno al deposito
 			solution.append(AppData.nodes[0])
 			# risultato soluzione
-			print('Distanza totale:' + AppData.total_lenght)
+			print('Distanza totale:' + str(AppData.total_length))
 
 			print('Nodi nella soluzione:')
 			for node in solution:
