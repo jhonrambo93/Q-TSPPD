@@ -9,8 +9,13 @@ class AppData:
     transfers = list()
 
     # capacity vehicle
-    Q = 5
+    capacity = 5
 
     # quantità corrente
     q_d_n = 0
 
+    # nodo corrente che inizialmente è il nodo 0
+    current_node = nodes[0]
+
+    # total lenght
+    total_lenght = 0
