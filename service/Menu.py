@@ -15,7 +15,7 @@ class Menu:
 		choice = ''
 		while choice != 'q':
 			print('\n- Main Menù -----------------------')
-			print('| <1>    |')
+			print('| <1> GREEDY   |')
 			print('| <2>    |')
 			print('| <3>    |')
 			print('| <4>    |')

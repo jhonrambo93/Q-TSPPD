@@ -1,10 +1,7 @@
 from service.AppData import AppData
 from node.Node import Node
-import math
-
-
-def lenght(node_1: Node, node_2: Node):
-    return math.sqrt((node_1.x - node_2.x) ** 2 + (node_1.y - node_2.y) ** 2)
+import utils
+import copy
 
 
 class MenuHandler:
@@ -17,55 +14,141 @@ class MenuHandler:
 		"""
 
 		if choice == "GREEDY":
-			# start
-			n_c = AppData.nodes[0] # nodo corrente che inizialmente è il nodo 0
+			# init
+			step = 0
 			border = []
 			solution = []
-			solution.append(n_c)
-			min_l = None
-			min_n = None
-			q = 0 # quantità nel furgone
+			nodes_in_solution = []
+			total_deliveries = 0
+			AppData.current_node = AppData.nodes[0]
+			solution.append(AppData.current_node)
+
+			AppData.initial_nodes = copy.deepcopy(AppData.nodes)
+
+			minimum_length = None
+			load = 0  # carico nel furgone
+
+			# first step
 			for node in AppData.nodes:
 				if node.q_p != 0:
 					border.append(node)
-			# for della GREEDY
-			for n_f in border:
-				l = lenght(n_c, n_f)
-				print(l)
-				if min_l is None:
-					min_l = l
-					min_n = n_f
-				elif l < min_l:
-					min_l = l
-					min_n = n_f
-			solution.append(min_n)
-			n_c = min_n
-			# Corico e scarico Nodo corrente
-			print('Nodo corrente, appena preso in carico,')
-			print(n_c)
 
-			# scarico il furgone della quantità del nodo corrente, se deve ricevere dal nodo corrente
+			# for node in border:
+				# print(node)
 
-			for t in AppData.transfers:
-				if (t.id_d == n_c.id) and (t.delivered == False):
-					pass
-					# if t.id_p è nella lista dei nodi da cui ho prelevato
-					# allora q = q - t_q , t.q = 0 e t.delivered = True
-
-			for node in solution:
-				if (n_c.q_d != 0):
-					q = q - n_c.q_d # sarebbe q = q + n_c.q_p, l'ho scritto il modo più sintetico
-					AppData.nodes[n_c.id].q_d = AppData.nodes[n_c.id].q_d - q
-
+			print('Calcolo delle distanze rispetto i nodi di border ...')
+			# trovo il nodo più vicino
+			nearest_n = utils.get_nearest_node(border, minimum_length)
+			solution.append(nearest_n)
+			nodes_in_solution.append(nearest_n)
+			minimum_length = None
 			# carico il furgone della quantità del nodo corrente, se possibile
-			if (q+n_c.q_p) < AppData.Q:
-				q += n_c.q_p
-				AppData.nodes[n_c.id].q_p = 0
-			print('Nodo corrente, dopo aver prelevato q_p')
-			print(n_c)
-			print('Quantità nel furgone')
-			print(q)
+			if (load + AppData.current_node.q_p) <= AppData.capacity:
+				load += AppData.current_node.q_p
+				AppData.nodes[AppData.current_node.id].q_p = 0
 
+			print('Nodo corrente:' + str(AppData.current_node))
+			print('Quantità nel furgone, al primo carico dopo il nodo 0:' + str(load))
+
+			border.clear()
+
+			# Other steps
+			while utils.complete_deliveries(total_deliveries):
+				step += 1
+				print('Step ' + str(step))
+
+				print("-----------------nodes-------------------")
+				for node in AppData.nodes:
+					print(node)
+				print("-------------initial_node----------------")
+				for node in AppData.initial_nodes:
+					print(node)
+				print("-----------------------------------------")
+
+				for node in AppData.nodes:
+					if node.id != 0 and node.id != AppData.current_node.id and utils.abmissibility_greedy(node, load, nodes_in_solution):
+						border.append(node)
+
+				# to avoid deadlock
+				if not border:
+					for node in AppData.nodes:
+						if node.id != AppData.current_node.id and node.q_p != 0:
+							border.append(node)
+
+				print('Nodi frontiera, con i vincoli imposti:')
+				for node in border:
+					print(node)
+
+				print('Calcolo delle distanze rispetto i nodi di border ...')
+				# trovo il nodo più vicino
+				nearest_n = utils.get_nearest_node(border, minimum_length)
+				solution.append(nearest_n)
+				if nearest_n not in nodes_in_solution:
+					nodes_in_solution.append(nearest_n)
+				minimum_length = None
+				print("nodo più vicino scelto:"  + str(nearest_n))
+
+				epsilon = 0
+				# scarico il furgone della quantità del nodo corrente, se deve ricevere dal nodo corrente
+				print("FASE DI SCARICO")
+				for s in nodes_in_solution:
+					for t in AppData.transfers:
+						if (t.id_d == AppData.current_node.id) and (t.delivered is False) and (t.id_p == s.id):
+							print("id nodeo corrente = " + str(t.id_p))
+							print("initial_node_q_p= " + str(AppData.initial_nodes[t.id_p].q_p))
+							print("current_node_q_p= " + str(AppData.nodes[t.id_p].q_p))
+							epsilon = AppData.initial_nodes[t.id_p].q_p - AppData.nodes[t.id_p].q_p
+							if epsilon == AppData.initial_nodes[t.id_p].q_p:
+								print("epsilon = " + str(epsilon))
+								load = load - t.q  # scarico il furgone della quantità
+								# decremento della quantità t.q nella lista dei nodi
+								AppData.nodes[AppData.current_node.id].q_d -= t.q
+								t.q = 0
+								t.delivered = True
+								total_deliveries = total_deliveries + 1
+							elif (epsilon >= 0) and (epsilon < AppData.initial_nodes[t.id_p].q_p):
+								print("epsilon = " + str(epsilon))
+								load = load - epsilon
+								AppData.nodes[AppData.current_node.id].q_d -= epsilon
+								AppData.initial_nodes[t.id_p].q_p -= epsilon
+								if AppData.nodes[AppData.current_node.id].q_d == 0:
+									print("okokokok")
+									t.q = 0
+									t.delivered = True
+									total_deliveries += 1
+								else:
+									t.q -= epsilon
+									# t.delivered rimane False e non vado ad aumentare le deliveries totali
+							elif epsilon == 0:
+								print("epsilon = " + str(epsilon) + "non posso scaricare")
+
+
+				# carico il furgone della quantità del nodo corrente, se possibile
+
+				print("FASE DI CARICO")
+				load += AppData.current_node.q_p
+				if load <= AppData.capacity:
+					AppData.nodes[AppData.current_node.id].q_p = 0
+				else:
+					scarto = load - AppData.capacity
+					load = load - scarto
+					AppData.nodes[AppData.current_node.id].q_p = scarto
+
+				print('Nodo corrente, prima di ripetere il while:' + str(AppData.current_node))
+				print('Quantità nel furgone:' + str(load))
+
+				# pulizia del bordo altrimenti rimangono altri nodi come minimo
+				border.clear()
+
+			# ritorno al deposito
+			solution.append(AppData.nodes[0])
+			# risultato soluzione
+			print('Distanza totale:' + str(AppData.total_length))
+			print('Nodi nella soluzione:')
+			for node in solution:
+				print(node)
+			# reset risultato
+			AppData.total_length = 0
 
 		if choice == "":
 			pass

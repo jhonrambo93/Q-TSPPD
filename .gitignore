@@ -1,3 +1,4 @@
 # ios pycharm files
 .DS_Store
 .idea
+.__/pycache__/
