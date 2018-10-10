@@ -25,9 +25,6 @@ class MenuHandler:
 
 			AppData.initial_nodes = copy.deepcopy(AppData.nodes)
 
-			# for i in range(0,len(AppData.nodes)):
-				# AppData.initial_nodes.append(AppData.nodes[i])
-
 			minimum_length = None
 			load = 0  # carico nel furgone
 
@@ -61,7 +58,6 @@ class MenuHandler:
 				print('Step ' + str(step))
 
 				print("-----------------nodes-------------------")
-				print("Nodi di nodes")
 				for node in AppData.nodes:
 					print(node)
 				print("-------------initial_node----------------")
@@ -110,11 +106,13 @@ class MenuHandler:
 								t.q = 0
 								t.delivered = True
 								total_deliveries = total_deliveries + 1
-							elif (epsilon != AppData.initial_nodes[t.id_p].q_p) and (epsilon < AppData.initial_nodes[t.id_p].q_p):
+							elif (epsilon >= 0) and (epsilon < AppData.initial_nodes[t.id_p].q_p):
 								print("epsilon = " + str(epsilon))
 								load = load - epsilon
 								AppData.nodes[AppData.current_node.id].q_d -= epsilon
+								AppData.initial_nodes[t.id_p].q_p -= epsilon
 								if AppData.nodes[AppData.current_node.id].q_d == 0:
+									print("okokokok")
 									t.q = 0
 									t.delivered = True
 									total_deliveries += 1
