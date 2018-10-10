@@ -45,6 +45,7 @@ if __name__ == '__main__':
 					node.q_p = node.q_p + transfer.q
 				elif transfer.id_d == node.id:
 					node.q_d = node.q_d + transfer.q
+
 	# for node in AppData.nodes:
 	# print(node)
 

@@ -44,7 +44,7 @@ def complete_deliveries(total_deliveries: int) -> bool:
 def get_nearest_node(border: list, minimum_length) -> float:
 	for n_f in border:
 		l = lenght(AppData.current_node, n_f)
-		print(l)
+		# print(l)
 		if minimum_length is None:
 			minimum_length = l
 			nearest_n = n_f

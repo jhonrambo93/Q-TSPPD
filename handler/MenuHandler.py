@@ -1,6 +1,7 @@
 from service.AppData import AppData
 from node.Node import Node
 import utils
+import copy
 
 
 class MenuHandler:
@@ -21,6 +22,12 @@ class MenuHandler:
 			total_deliveries = 0
 			AppData.current_node = AppData.nodes[0]
 			solution.append(AppData.current_node)
+
+			AppData.initial_nodes = copy.deepcopy(AppData.nodes)
+
+			# for i in range(0,len(AppData.nodes)):
+				# AppData.initial_nodes.append(AppData.nodes[i])
+
 			minimum_length = None
 			load = 0  # carico nel furgone
 
@@ -29,10 +36,10 @@ class MenuHandler:
 				if node.q_p != 0:
 					border.append(node)
 
-			for node in border:
-				print(node)
+			# for node in border:
+				# print(node)
 
-			print('Distanze nodi frontiera dal nodo 0:')
+			print('Calcolo delle distanze rispetto i nodi di border ...')
 			# trovo il nodo più vicino
 			nearest_n = utils.get_nearest_node(border, minimum_length)
 			solution.append(nearest_n)
@@ -52,6 +59,16 @@ class MenuHandler:
 			while utils.complete_deliveries(total_deliveries):
 				step += 1
 				print('Step ' + str(step))
+
+				print("-----------------nodes-------------------")
+				print("Nodi di nodes")
+				for node in AppData.nodes:
+					print(node)
+				print("-------------initial_node----------------")
+				for node in AppData.initial_nodes:
+					print(node)
+				print("-----------------------------------------")
+
 				for node in AppData.nodes:
 					if node.id != 0 and node.id != AppData.current_node.id and utils.abmissibility_greedy(node, load, nodes_in_solution):
 						border.append(node)
@@ -63,35 +80,54 @@ class MenuHandler:
 							border.append(node)
 
 				print('Nodi frontiera, con i vincoli imposti:')
-
 				for node in border:
 					print(node)
 
-				print('Distanze nodi frontiera dal nodo corrente:')
+				print('Calcolo delle distanze rispetto i nodi di border ...')
 				# trovo il nodo più vicino
 				nearest_n = utils.get_nearest_node(border, minimum_length)
 				solution.append(nearest_n)
 				if nearest_n not in nodes_in_solution:
 					nodes_in_solution.append(nearest_n)
 				minimum_length = None
-				print("nodo più vicino scelto:" + str(nearest_n))
-				print('Nodi prima di modifica di q:')
-				for node in AppData.nodes:
-					print(node)
+				print("nodo più vicino scelto:"  + str(nearest_n))
 
+				epsilon = 0
 				# scarico il furgone della quantità del nodo corrente, se deve ricevere dal nodo corrente
+				print("FASE DI SCARICO")
 				for s in nodes_in_solution:
 					for t in AppData.transfers:
 						if (t.id_d == AppData.current_node.id) and (t.delivered is False) and (t.id_p == s.id):
-							load = load - t.q  # scarico il furgone della quantità
-							# decremento della quantità t.q nella lista dei nodi
-							AppData.nodes[AppData.current_node.id].q_d = AppData.nodes[AppData.current_node.id].q_d - t.q
-							t.q = 0
-							t.delivered = True
-							total_deliveries = total_deliveries + 1
+							print("id nodeo corrente = " + str(t.id_p))
+							print("initial_node_q_p= " + str(AppData.initial_nodes[t.id_p].q_p))
+							print("current_node_q_p= " + str(AppData.nodes[t.id_p].q_p))
+							epsilon = AppData.initial_nodes[t.id_p].q_p - AppData.nodes[t.id_p].q_p
+							if epsilon == AppData.initial_nodes[t.id_p].q_p:
+								print("epsilon = " + str(epsilon))
+								load = load - t.q  # scarico il furgone della quantità
+								# decremento della quantità t.q nella lista dei nodi
+								AppData.nodes[AppData.current_node.id].q_d -= t.q
+								t.q = 0
+								t.delivered = True
+								total_deliveries = total_deliveries + 1
+							elif (epsilon != AppData.initial_nodes[t.id_p].q_p) and (epsilon < AppData.initial_nodes[t.id_p].q_p):
+								print("epsilon = " + str(epsilon))
+								load = load - epsilon
+								AppData.nodes[AppData.current_node.id].q_d -= epsilon
+								if AppData.nodes[AppData.current_node.id].q_d == 0:
+									t.q = 0
+									t.delivered = True
+									total_deliveries += 1
+								else:
+									t.q -= epsilon
+									# t.delivered rimane False e non vado ad aumentare le deliveries totali
+							elif epsilon == 0:
+								print("epsilon = " + str(epsilon) + "non posso scaricare")
+
 
 				# carico il furgone della quantità del nodo corrente, se possibile
 
+				print("FASE DI CARICO")
 				load += AppData.current_node.q_p
 				if load <= AppData.capacity:
 					AppData.nodes[AppData.current_node.id].q_p = 0

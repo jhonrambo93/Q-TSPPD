@@ -3,7 +3,10 @@
 class AppData:
 
     # ('id', 'x', 'y', 'q_p', 'q_d')
-    nodes = list()
+    nodes = []
+
+    # ('id', 'x', 'y', 'q_p', 'q_d')
+    initial_nodes = []
 
     # ('id_p','id_d','quantity','delivered')
     transfers = list()
