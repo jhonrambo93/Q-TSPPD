@@ -3,7 +3,7 @@ from node.Node import Node
 import math
 
 
-# funzione distanza euclidea
+# Euclidean distance function
 def lenght(node_1: Node, node_2: Node) -> float:
 	return math.sqrt((node_1.x - node_2.x) ** 2 + (node_1.y - node_2.y) ** 2)
 
@@ -13,7 +13,6 @@ def abmissibility_greedy(node: Node, q: int, nodes_in_solution: list) -> bool:
 	if node.q_p == 0 and node.q_d == 0:
 		return False
 	else:
-		# Se metto < invece di <= siamo nel caso in cui il bordo non viene creato, risolvere il problema!???
 		if (is_destination(node, nodes_in_solution)) and (q-AppData.q_d_n+node.q_p <= AppData.capacity):
 			return True
 		else:
