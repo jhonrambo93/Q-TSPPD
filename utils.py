@@ -40,7 +40,7 @@ def complete_deliveries(total_deliveries: int) -> bool:
 
 
 # funzione che trova il nodo più vicino
-def get_nearest_node(border: list, minimum_length) -> float:
+def get_nearest_node(border: list, minimum_length) -> Node:
 	for n_f in border:
 		l = lenght(AppData.current_node, n_f)
 		# print(l)
@@ -53,3 +53,10 @@ def get_nearest_node(border: list, minimum_length) -> float:
 	AppData.current_node = nearest_n
 	AppData.total_length += minimum_length
 	return nearest_n
+
+
+# funzione valore
+def get_value() -> float:
+	pass
+# ( carico - scarico / Q ) / distanza euclidea
+# però carico e scarico devono essere effettivi
