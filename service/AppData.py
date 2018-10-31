@@ -22,3 +22,6 @@ class AppData:
 
     # total length
     total_length = 0
+
+    # nodi che sono nella soluzione
+    nodes_in_solution = []

@@ -9,11 +9,11 @@ def lenght(node_1: Node, node_2: Node) -> float:
 
 
 # Funzione ammissibilità nodo successivo
-def abmissibility_greedy(node: Node, q: int, nodes_in_solution: list) -> bool:
+def abmissibility_greedy(node: Node, load: int, nodes_in_solution: list) -> bool:
 	if node.q_p == 0 and node.q_d == 0:
 		return False
 	else:
-		if (is_destination(node, nodes_in_solution)) and (q-AppData.q_d_n+node.q_p <= AppData.capacity):
+		if (is_destination(node, nodes_in_solution)):
 			return True
 		else:
 			return False
@@ -21,12 +21,12 @@ def abmissibility_greedy(node: Node, q: int, nodes_in_solution: list) -> bool:
 
 # funzione che controlla se nel nodo corrente devo scaricare
 def is_destination(node: Node, nodes_in_solution: list) -> bool:
-	AppData.q_d_n = 0
+	AppData.q_d_n = 0  #quantitàdelivery effettiva
 	for n_s in nodes_in_solution:
 		for t in AppData.transfers:
-			if t.delivered is False and n_s.id == t.id_p:
+			if t.delivered is False and n_s.id == t.id_p and n_s.furgone != 0:
 				if t.id_d == node.id:
-					AppData.q_d_n = t.q  # Quantità corretta da scaricare
+					#AppData.q_d_n = t.q
 					return True
 	return False
 
@@ -40,7 +40,7 @@ def complete_deliveries(total_deliveries: int) -> bool:
 
 
 # funzione che trova il nodo più vicino
-def get_nearest_node(border: list, minimum_length) -> Node:
+def get_nearest_node(border: list, minimum_length: float) -> Node:
 	for n_f in border:
 		l = lenght(AppData.current_node, n_f)
 		# print(l)
@@ -55,8 +55,37 @@ def get_nearest_node(border: list, minimum_length) -> Node:
 	return nearest_n
 
 
+def get_best_node(border: list, max_value: float, load: int) -> Node:
+	for n_f in border:
+		value = get_value(n_f, load)
+		if max_value is None:
+			max_value = value
+			best_n = n_f
+		elif value > max_value:
+			max_value = value
+			best_n = n_f
+	AppData.total_length += lenght(AppData.current_node, best_n)
+	AppData.current_node = best_n
+	return best_n
+
 # funzione valore
-def get_value() -> float:
-	pass
-# ( carico - scarico / Q ) / distanza euclidea
-# però carico e scarico devono essere effettivi
+def get_value(n_f: Node, load: int) -> float:
+	#print('\nSCARICO')
+	scarico = 0
+	for s in AppData.nodes_in_solution:
+		for t in AppData.transfers:
+			if (t.id_d == n_f.id) and (t.delivered is False) and (t.id_p == s.id):
+				epsilon = AppData.initial_nodes[t.id_p].q_p - AppData.nodes[t.id_p].q_p
+				if epsilon >= t.q:
+					scarico =  t.q
+				else:
+					scarico = epsilon
+
+	q = load - scarico + n_f.q_p
+	if q <= AppData.capacity:
+		carico = n_f.q_p
+	else:
+		scarto = q - AppData.capacity
+		carico = n_f.q_p - scarto
+
+	return ((load - scarico + carico) / AppData.capacity) / lenght(AppData.current_node, n_f)
