@@ -13,7 +13,6 @@ class MenuHandler:
 		if choice == "GREEDY":
 
 			# initialization
-			steps = [] # id, node_previous, node_next, border, transfers, load
 			step = 0
 			border = []  # possibili nodi raggiungibili
 			solution = []  # elenco dei nodi che compongono la soluzione, cioè il viaggio del furgoncino
@@ -39,16 +38,17 @@ class MenuHandler:
 			print('\nStep ' + str(step))
 
 			print('Calcolo delle distanze rispetto i nodi del border ...')
+
 			# trovo il nodo più vicino
 			nearest_n = utils.get_nearest_node(border, minimum_length)
 			solution.append(nearest_n)
 			AppData.nodes_in_solution.append(nearest_n)
 
-			###################### Salvo ciò che viene fatto allo step 0 ##########################################
-			steps.append(Step(0, AppData.current_node, None, nearest_n, copy.deepcopy(border), list(), 0, 0))
-			#######################################################################################################
+			# ##################### Salvo ciò che viene fatto allo step 0 ##########################################
+			AppData.steps.append(Step(AppData.current_node, None, nearest_n, copy.deepcopy(border), list(), 0, 0))
+			# ######################################################################################################
 
-			#aggiono il nodo corrente, corrispondente allo step 1
+			# aggiono il nodo corrente, corrispondente allo step 1
 			AppData.current_node = nearest_n
 
 			minimum_length = None
@@ -68,7 +68,7 @@ class MenuHandler:
 
 			# Salvo ciò che viene fatto allo step 1
 			# id - corrente - nodo_prima - nodo_next - border - transfers - load
-			steps.append(Step(1, AppData.current_node, steps[0].current_node, None, list(), list(), load, load))
+			AppData.steps.append(Step(AppData.current_node, AppData.steps[0].current_node, None, list(), list(), load, load))
 
 
 			# Other steps
@@ -85,7 +85,7 @@ class MenuHandler:
 				print('-----------------------------------------')
 
 				for node in AppData.nodes:
-					if node.id != 0 and node.id != AppData.current_node.id and utils.abmissibility_greedy(node, load, AppData.nodes_in_solution):
+					if node.id != 0 and node.id != AppData.current_node.id and utils.abmissibility_greedy(node, AppData.nodes_in_solution):
 						border.append(node)
 
 				# to avoid deadlock
@@ -98,7 +98,6 @@ class MenuHandler:
 				for node in border:
 					print(node)
 
-
 				print('Calcolo delle distanze rispetto i nodi di border ...')
 				# trovo il nodo più vicino
 				nearest_n = utils.get_nearest_node(border, minimum_length)
@@ -106,17 +105,17 @@ class MenuHandler:
 				if nearest_n not in AppData.nodes_in_solution:
 					AppData.nodes_in_solution.append(nearest_n)
 
-				############Aggiorno border e nearest node dello step 1################
-				steps[step-1].border = copy.deepcopy(border)
-				steps[step-1].node_next = nearest_n
-				#######################################################################
+				# ###########Aggiorno border e nearest node dello step 1################
+				AppData.steps[step-1].border = copy.deepcopy(border)
+				AppData.steps[step-1].node_next = nearest_n
+				# ######################################################################
 
 				AppData.current_node = nearest_n
 
-				##########################step 2 primo aggiornamento##########################################
+				# #########################step 2 primo aggiornamento##########################################
 				# id - corrente - nodo_prima - nodo_next - border - transfers - load
-				steps.append(Step(step, AppData.current_node, steps[step-1].current_node, None, list(), list(), load, 0))
-				##############################################################################################
+				AppData.steps.append(Step(AppData.current_node, AppData.steps[step-1].current_node, None, list(), list(), load, 0))
+				# #############################################################################################
 				minimum_length = None
 				print('nodo più vicino, scelto: ' + str(nearest_n))
 
@@ -141,7 +140,7 @@ class MenuHandler:
 
 								t.delivered = True
 								################################
-								steps[step].transfers.append(t)
+								AppData.steps[step].transfers.append(t)
 								################################
 								t.q = 0
 								total_deliveries += 1
@@ -153,10 +152,12 @@ class MenuHandler:
 								AppData.nodes[t.id_p].furgone -= epsilon
 								AppData.nodes[AppData.current_node.id].q_d -= epsilon
 								AppData.initial_nodes[t.id_p].q_p -= epsilon
-								#################################
-								steps[step].transfers.append(t)
-								#################################
 								t.q -= epsilon
+								# ################################
+								AppData.steps[step].transfers.append(t) # metto il task in coda ai task dello step
+								len(AppData.steps[step].transfers) # quanti task ho in step
+								AppData.steps[step].transfers[len-1].q = epsilon # al task corrente vado a mettergli il corretto q rimasto
+								# ################################
 								print('Quantità scaricata = ', epsilon)
 
 							unload = True
@@ -170,9 +171,9 @@ class MenuHandler:
 				load += AppData.current_node.q_p
 				if load <= AppData.capacity:
 					print('Quantità caricata = ', AppData.nodes[AppData.current_node.id].q_p)
-					###############################################################################
-					steps[step].carico = AppData.nodes[AppData.current_node.id].q_p
-					###############################################################################
+					# ##############################################################################
+					AppData.steps[step].carico = AppData.nodes[AppData.current_node.id].q_p
+					# ##############################################################################
 					AppData.nodes[AppData.current_node.id].furgone += AppData.nodes[AppData.current_node.id].q_p
 					AppData.nodes[AppData.current_node.id].q_p = 0
 				elif load > AppData.capacity:
@@ -181,15 +182,15 @@ class MenuHandler:
 					carico = AppData.nodes[AppData.current_node.id].furgone = AppData.nodes[AppData.current_node.id].furgone + (AppData.nodes[AppData.current_node.id].q_p - scarto)
 					AppData.nodes[AppData.current_node.id].q_p = scarto
 					print('Quantità caricataa = ', carico)
-					###############################################
-					steps[step].carico = carico
-					###############################################
+					# ##############################################
+					AppData.steps[step].carico = carico
+					# ##############################################
 
 				# print('Nodo corrente, prima di ripetere il while:' + str(AppData.current_node))
 				print('\nQuantità nel furgone:' + str(load))
 
-				##################################
-				steps[step].load = load
+				# #################################
+				AppData.steps[step].load = load
 				##################################
 
 				print('Stato consegne')
@@ -206,22 +207,71 @@ class MenuHandler:
 			print('Nodi nella soluzione:')
 			for node in solution:
 				print(node)
-			# reset risultato
-			AppData.total_length = 0
-			total_deliveries = 0
 
-		if choice == "DESTROY AND REPAIR":
-			j = random.randint(2,step-1) #lo step finale con 0 non c'è quindi step-1 per non andare in overflow
-			if steps[j].carico == 0 and utils.is_next_present(steps, j):
-				#print('Il nodo ' + str(steps[j].current_node.id) + ' allo step' + str(j) + ' può essere eliminato')
+		if choice == "DESTROY_AND_REPAIR":
 
-				#possiamo eliminare lo step[j]
-				#mettere volanti i task (trasferimenti)
-				#aggiornare il furgone
+			i = 0
+			not_delivered = 0
+			j = random.randint(2, step-1)  # lo step finale con 0 non c'è quindi step-1 per non andare in overflow
+			if AppData.steps[j].carico == 0 and utils.is_next_present(j) and AppData.steps[j].node_previous.id != AppData.steps[j].node_next.id:
+				# print('Il nodo ' + str(AppData.steps[j].current_node.id) + ' allo step' + str(j) + ' può essere eliminato')
+				# Metto volanti i task (trasferimenti)
+				for t in AppData.steps[j].transfers:
+					for k in AppData.transfers:
+						if t.id_p == k.id_p and t.id_d == k.id_d:
+							k.delivered = False
+							k.q = t.q
+							not_delivered += t.q
 
+				i = j
+				n_over = 0
+
+				task_assigned = False
+				while not task_assigned and i < len(AppData.steps):
+					i += 1
+					AppData.steps[i].load += not_delivered
+					if AppData.steps[step].load <= AppData.capacity:
+						pass
+						over_load = 1
+					else:
+						over_load = 1+(AppData.steps[step].load)/AppData.capacity
+						n_over =
+						over_load += n_over
+
+
+
+
+					# i task del nodo eliminato li dobbiamo mettere nel nodo corrente
+					if AppData.steps[step].current_node.id == AppData.steps[j].current_node.id:
+						for transfer in AppData.steps[j].transfers:
+							AppData.steps[step].transfers.append(transfer)
+					# aggiornare con true la lista dei AppData.transfers
+						for t in AppData.steps[j].transfers:
+							for k in AppData.transfers:
+								if t.id_p == k.id_p and t.id_d == k.id_d:
+									k.delivered = True
+									k.q = t.q
 			else:
 				print('Non è possibile effettuare miglioramenti alla soluzione')
 
+			if utils.controllo_consegne():
+				tot_l = AppData.total_length
+				tot_l -= (utils.lenght(AppData.steps[j].node_previous, AppData.steps[j].current_node) + (utils.lenght(AppData.steps[j].current_node, AppData.steps[j].node_next)))
+				tot_l += (utils.lenght(AppData.steps[j].node_previous, AppData.steps[j].node_next))
+
+				if tot_l > AppData.total_length:
+					print('la soluzione è stata peggiorata')
+				else:
+					print('la soluzione è stata migliorata = ' + str(tot_l))
+			else:
+				print('Errore nelle consegne: tasks non ripartizionabili!')
+				# ritornare alla random
+
+
+
+
+			#creare nuova soluzione
+			#controllare se gli step vengono aggiornatai bene o meno
 
 
 
@@ -281,7 +331,7 @@ class MenuHandler:
 				print('-----------------------------------------')
 
 				for node in AppData.nodes:
-					if node.id != 0 and node.id != AppData.current_node.id and utils.abmissibility_greedy(node, load, AppData.nodes_in_solution):
+					if node.id != 0 and node.id != AppData.current_node.id and utils.abmissibility_greedy(node, AppData.nodes_in_solution):
 						border.append(node)
 
 				# to avoid deadlock

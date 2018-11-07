@@ -25,3 +25,6 @@ class AppData:
 
     # nodi che sono nella soluzione
     nodes_in_solution = []
+
+    # node_previous, node_next, border, transfers, load, carico
+    steps = []

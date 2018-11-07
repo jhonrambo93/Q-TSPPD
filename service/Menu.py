@@ -15,9 +15,9 @@ class Menu:
 		choice = ''
 		while choice != 'q':
 			print('\n- Main Menù -----------------------')
-			print('| <1> GREEDY   |')
-			print('| <2> GREEDY_BY_VALUE |')
-			print('| <3>    |')
+			print('| <1> GREEDY              |')
+			print('| <2> GREEDY_BY_VALUE     |')
+			print('| <3> DESTROY_AND_REPAIR  |')
 			print('| <4>    |')
 			print('-----------------------------------')
 			choice = input('Select an option (q to logout): ')
@@ -28,7 +28,7 @@ class Menu:
 				elif choice == '2':
 					command = 'GREEDY_BY_VALUE'
 				elif choice == '3':
-					command = ''
+					command = 'DESTROY_AND_REPAIR'
 				elif choice == '4':
 					command = ''
 

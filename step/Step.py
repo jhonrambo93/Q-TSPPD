@@ -3,8 +3,7 @@ from node.Node import Node
 
 class Step:
 
-    def __init__(self, id: int, current_node: Node, node_previous: Node, node_next: Node, border: list(), transfers: list(), load: int, carico: int):
-        self.id = id
+    def __init__(self, current_node: Node, node_previous: Node, node_next: Node, border: list, transfers: list, load: int, carico: int):
         self.current_node = current_node
         self.node_previous = node_previous
         self.node_next = node_next
@@ -15,5 +14,5 @@ class Step:
 
 
     def __str__(self):
-        out = str(self.id) + " {} {} {} {} {} {} {} ".format(self.current_node, self.node_previous, self.node_next, self.border, self.transfers, self.load, self.carico)
+        out = " {} {} {} {} {} {} {} ".format(self.current_node, self.node_previous, self.node_next, self.border, self.transfers, self.load, self.carico)
         return out
