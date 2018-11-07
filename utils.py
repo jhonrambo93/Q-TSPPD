@@ -50,7 +50,6 @@ def get_nearest_node(border: list, minimum_length: float) -> Node:
 		elif l < minimum_length:
 			minimum_length = l
 			nearest_n = n_f
-	AppData.current_node = nearest_n
 	AppData.total_length += minimum_length
 	return nearest_n
 
@@ -89,3 +88,14 @@ def get_value(n_f: Node, load: int) -> float:
 		carico = n_f.q_p - scarto
 
 	return ((load - scarico + carico) / AppData.capacity) / lenght(AppData.current_node, n_f)
+
+#funzione per vedere se un nodo è presente nella soluzione dopo un determinato punto di taglio
+def is_next_present(steps: list, j: int) -> bool:
+	counter = 0
+	for s in range(steps[j + 1], len(steps)):
+		if steps[j].current_node == steps[s].current_node:
+			counter += 1
+	if counter > 0:
+		return True
+	else:
+		return False
