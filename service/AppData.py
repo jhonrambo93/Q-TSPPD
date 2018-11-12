@@ -28,3 +28,6 @@ class AppData:
 
     # node_previous, node_next, border, transfers, load, carico
     steps = []
+
+    # set of steps list
+    set_solution = []
