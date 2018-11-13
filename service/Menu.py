@@ -16,7 +16,7 @@ class Menu:
 		while choice != 'q':
 			print('\n- Main Menù -----------------------')
 			print('| <1> GREEDY   |')
-			print('| <2>    |')
+			print('| <2> GREEDY_BY_VALUE |')
 			print('| <3>    |')
 			print('| <4>    |')
 			print('-----------------------------------')
@@ -26,7 +26,7 @@ class Menu:
 				if choice == '1':
 					command = 'GREEDY'
 				elif choice == '2':
-					command = ''
+					command = 'GREEDY_BY_VALUE'
 				elif choice == '3':
 					command = ''
 				elif choice == '4':

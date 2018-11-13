@@ -9,7 +9,7 @@ class AppData:
     initial_nodes = []
 
     # ('id_p','id_d','quantity','delivered')
-    transfers = list()
+    transfers = []
 
     # capacity vehicle
     capacity = 5
@@ -22,3 +22,6 @@ class AppData:
 
     # total length
     total_length = 0
+
+    # nodi che sono nella soluzione
+    nodes_in_solution = []
