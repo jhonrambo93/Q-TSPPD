@@ -31,3 +31,6 @@ class AppData:
 
     # set of steps list
     set_solution = []
+
+    # lenght degli steps di set solution
+    len_set_solution = []
