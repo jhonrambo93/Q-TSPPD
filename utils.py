@@ -13,7 +13,7 @@ def abmissibility_greedy(node: Node, nodes_in_solution: list) -> bool:
 	if node.q_p == 0 and node.q_d == 0:
 		return False
 	else:
-		if (is_destination(node, nodes_in_solution)):
+		if is_destination(node, nodes_in_solution):
 			return True
 		else:
 			return False
@@ -21,12 +21,12 @@ def abmissibility_greedy(node: Node, nodes_in_solution: list) -> bool:
 
 # funzione che controlla se nel nodo corrente devo scaricare
 def is_destination(node: Node, nodes_in_solution: list) -> bool:
-	AppData.q_d_n = 0  #quantitàdelivery effettiva
+	AppData.q_d_n = 0  # quantità delivery effettiva
 	for n_s in nodes_in_solution:
 		for t in AppData.transfers:
 			if t.delivered is False and n_s.id == t.id_p and n_s.furgone != 0:
 				if t.id_d == node.id:
-					#AppData.q_d_n = t.q
+					# AppData.q_d_n = t.q
 					return True
 	return False
 
@@ -67,9 +67,10 @@ def get_best_node(border: list, max_value: float, load: int) -> Node:
 	AppData.current_node = best_n
 	return best_n
 
+
 # funzione valore
 def get_value(n_f: Node, load: int) -> float:
-	#print('\nSCARICO')
+	# print('\nSCARICO')
 	scarico = 0
 	for s in AppData.nodes_in_solution:
 		for t in AppData.transfers:
@@ -106,7 +107,7 @@ def is_next_present(j: int) -> bool:
 def controllo_consegne() -> bool:
 	counter_transfer = 0
 	for t in AppData.transfers:
-		if t.delivered == True:
+		if t.delivered:
 			counter_transfer += 1
 	if counter_transfer == len(AppData.transfers):
 		return True
