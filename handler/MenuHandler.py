@@ -204,6 +204,11 @@ class MenuHandler:
 			print('Nodi nella soluzione:')
 			for node in solution:
 				print(node)
+
+			# ###########Aggiorno next node del penultimo step (prima del ritorno al deposito)################
+			AppData.steps[step].node_next = solution[0]
+			# ######################################################################
+
 			AppData.set_solution.append(AppData.steps)
 
 		if choice == "DESTROY_AND_REPAIR":
@@ -234,7 +239,7 @@ class MenuHandler:
 						go = False
 					else:
 						step += 1
-
+				print('Step selected: ' + str(destroy_and_repair_steps[j].id))
 				if destroy_and_repair_steps[j].carico == 0 and utils.is_next_present(j) and destroy_and_repair_steps[j].node_previous.id != destroy_and_repair_steps[j].node_next.id:
 					print('Step selezionato: ' + str(destroy_and_repair_steps[j].id))
 					# print('Il nodo ' + str(destroy_and_repair_steps[j].current_node.id)
@@ -324,6 +329,7 @@ class MenuHandler:
 					print('Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: ' + str(destroy_and_repair_steps[j].id))
 
 			# ultimo errore distanze dovuto a che non modifichiamo appData.Totoal_lenght
+
 
 			# controllare se gli step vengono aggiornati bene o meno
 
