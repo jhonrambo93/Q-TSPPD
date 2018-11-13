@@ -113,3 +113,4 @@ def controllo_consegne() -> bool:
 		return True
 	else:
 		return False
+
