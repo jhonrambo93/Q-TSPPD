@@ -43,7 +43,6 @@ def complete_deliveries(total_deliveries: int) -> bool:
 def get_nearest_node(border: list, minimum_length: float) -> Node:
 	for n_f in border:
 		l = lenght(AppData.current_node, n_f)
-		# print(l)
 		if minimum_length is None:
 			minimum_length = l
 			nearest_n = n_f
@@ -70,7 +69,6 @@ def get_best_node(border: list, max_value: float, load: int) -> Node:
 
 # funzione valore
 def get_value(n_f: Node, load: int) -> float:
-	# print('\nSCARICO')
 	scarico = 0
 	for s in AppData.nodes_in_solution:
 		for t in AppData.transfers:
@@ -114,3 +112,17 @@ def controllo_consegne() -> bool:
 	else:
 		return False
 
+
+# funzione che trova la soluzione ottima tra le tante ottunute con le euristiche di miglioramento
+def get_best_solution() -> (list, float):
+	minimum_solution = None
+	steps_best_solution = []
+	for s in AppData.len_set_solution:
+		l = s
+		if minimum_solution is None:
+			minimum_solution = l
+			steps_best_solution = AppData.set_solution[s]
+		elif l < minimum_solution:
+			minimum_solution = l
+			steps_best_solution = AppData.set_solution[s]
+	return steps_best_solution, minimum_solution

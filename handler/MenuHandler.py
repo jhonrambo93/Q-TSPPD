@@ -339,6 +339,11 @@ class MenuHandler:
 
 			# controllare se gli step vengono aggiornati bene o meno
 
+			# soluzione ottimizzata
+			print('La soluzione ottimizzata dalla destroy & repair è: ' + str(utils.get_best_solution()[0]))
+			for step in utils.get_best_solution()[1]:
+				print(step.current_node)
+
 		if choice == "GREEDY_BY_VALUE":
 			# initialization
 			step = 0
