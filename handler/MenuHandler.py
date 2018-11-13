@@ -209,10 +209,14 @@ class MenuHandler:
 			AppData.steps[step].node_next = solution[0]
 			# ######################################################################
 
+			# Inserisco gli step della soluzione della greedy come primo elemento nella set_solutione
+			# e relativa lunghezza in len_set_solution
 			AppData.set_solution.append(AppData.steps)
+			AppData.len_set_solution.append(AppData.total_length)
 
 		if choice == "DESTROY_AND_REPAIR":
 			# i = 0
+			tot_l = AppData.total_length
 			destroy_and_repair_steps = copy.deepcopy(AppData.steps)
 			not_delivered = 0
 			n_over = 0  # step con overload
@@ -230,7 +234,7 @@ class MenuHandler:
 				# fase di scelta randomo tra gli step possibili
 				step_random = random.choice(memory_random) # scelgo a caso un elemnto dalla lista
 				j = step_random.id # j, numero intero, è lo step che vado a selezionare
-				# vado ad eliminare da memeory_random lo step appena scelto
+				# vado ad eliminare da memory_random lo step appena scelto
 				step = 0
 				go = True
 				while go:
@@ -239,9 +243,8 @@ class MenuHandler:
 						go = False
 					else:
 						step += 1
-				print('Step selected: ' + str(destroy_and_repair_steps[j].id))
 				if destroy_and_repair_steps[j].carico == 0 and utils.is_next_present(j) and destroy_and_repair_steps[j].node_previous.id != destroy_and_repair_steps[j].node_next.id:
-					print('Step selezionato: ' + str(destroy_and_repair_steps[j].id))
+					print('Step sected: ' + str(j))
 					# print('Il nodo ' + str(destroy_and_repair_steps[j].current_node.id)
 					# + ' allo step' + str(j) + ' può essere eliminato')
 					# Metto volanti i task (trasferimenti)
@@ -252,7 +255,7 @@ class MenuHandler:
 								k.q = t.q
 								not_delivered += t.q
 					i = j
-					# n_over = 0  # step con overload
+					n_over = 0  # step con overload
 					while not_delivered != 0 and i < len(destroy_and_repair_steps) - 1:
 						i += 1
 						destroy_and_repair_steps[i].load += not_delivered
@@ -269,8 +272,7 @@ class MenuHandler:
 											k.delivered = True
 											k.q = t.q
 								not_delivered = 0
-							else:
-								pass
+
 						else:  # sono in overload
 							# controllo se lo step ha come nodo quello eliminato
 							# i task del nodo eliminato li dobbiamo mettere nel nodo corrente
@@ -297,11 +299,11 @@ class MenuHandler:
 									destroy_and_repair_steps[i].overload = overload * 1.50
 
 					if utils.controllo_consegne():
-						tot_l = AppData.total_length
+						tot_l = AppData.len_set_solution[len(AppData.set_solution) - 1] # forse list out of renge quindi if AppData.set_solution != 0
 						tot_l -= (utils.lenght(destroy_and_repair_steps[j].node_previous, destroy_and_repair_steps[j].current_node) + (utils.lenght(destroy_and_repair_steps[j].current_node, destroy_and_repair_steps[j].node_next)))
 						if n_over > 0:
 							for step in range(j, i):
-								tot_l = destroy_and_repair_steps[step].overload * (utils.lenght(destroy_and_repair_steps[j].node_previous, destroy_and_repair_steps[j].node_next))
+								tot_l += destroy_and_repair_steps[step].overload * (utils.lenght(destroy_and_repair_steps[j].node_previous, destroy_and_repair_steps[j].node_next))
 						else:
 							tot_l += (utils.lenght(destroy_and_repair_steps[j].node_previous, destroy_and_repair_steps[j].node_next))
 						if tot_l > AppData.total_length:
@@ -312,12 +314,15 @@ class MenuHandler:
 							for step in destroy_and_repair_steps:
 								print(step.current_node)
 							print(destroy_and_repair_steps[0].current_node)
-						# AppData.set_solution.append(destroy_and_repair_steps)
+							# AppData.set_solution.append(destroy_and_repair_steps)
+							# AppData.len_set_solution.append(tot_l)
 						else:
 							print('la soluzione è stata migliorata = ' + str(tot_l))
 							fail = 0  # resetto i fail per verificare se questa nuova soluzione è ottimo locale
 							del destroy_and_repair_steps[j]
+							# Aggiungo la nuova lista i step a set_solution e relativa total_lenght
 							AppData.set_solution.append(destroy_and_repair_steps)
+							AppData.len_set_solution.append(tot_l)
 							# print new solution
 							for step in destroy_and_repair_steps:
 								print(step.current_node)
