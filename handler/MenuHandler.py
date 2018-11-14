@@ -369,10 +369,14 @@ class MenuHandler:
 			if fail == 3:
 				print('Questo test di destroy_and_repair porta ad un ottimo locale, perchè ho ottenuto ' + str(fail) + ' soluzioni peggiorate consecutive!')
 
-			# soluzione ottimizzata
-			print('La soluzione ottimizzata dalla destroy & repair è: ' + str(utils.get_best_solution()[1]))
+			if utils.get_best_solution()[1] < AppData.len_set_solution[0]:
+				# soluzione ottimizzata
+				print('La soluzione ottimizzata dalla destroy & repair è: ' + str(utils.get_best_solution()[1]))
+			else:
+				print('La destroy & repair non è stata in grado di miglioare la soluzione della greedy!')
+			print('Solution:')
 			for count, step in enumerate(utils.get_best_solution()[0], 0):
-				print(f'{count}] ' + step.current_node)
+				print(f'{count} --> ' + str(step.current_node.id))
 
 		if choice == "GREEDY_BY_VALUE":
 			# initialization

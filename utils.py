@@ -117,8 +117,8 @@ def controllo_consegne() -> bool:
 def get_best_solution() -> (list, float):
 	minimum_solution = None  # distanza
 	steps_best_solution = []  # soluzione
-	for s in AppData.len_set_solution:
-		l = s
+	for s in range(0, len(AppData.len_set_solution)):
+		l = AppData.len_set_solution[s]
 		if minimum_solution is None:
 			minimum_solution = l
 			steps_best_solution = AppData.set_solution[s]
