@@ -216,124 +216,154 @@ class MenuHandler:
 
 		if choice == "DESTROY_AND_REPAIR":
 			# i = 0
-			tot_l = AppData.total_length
-			destroy_and_repair_steps = copy.deepcopy(AppData.set_solution[0])
+			# tot_l = AppData.total_length
 			not_delivered = 0
-			n_over = 0  # step con overload
+			# n_over = 0  # step con overload
 			fail = 0  # fail solution counter
+			x = 0  # contatore di quello
+			stop = False  # serve dopo aver trovato una nuova soluzione
+
+			destroy_and_repair_steps = copy.deepcopy(AppData.set_solution[0])
 			memory_random = copy.deepcopy(AppData.set_solution[0])  # steps per la random
 			# random che mi va a scegliere uno step da distruggere
 			# lo step finale prima dello 0 non ha successori quindi step-1 per non andare in overflow
-
 			del memory_random[len(memory_random) - 1]  # tolgo l'ultimo
 			del memory_random[0]  # tolgo il primo
 			del memory_random[0]  # tolgo il primo della "nuova lista" che corrisponderebbe a memory_random[1]
 
 			while fail < 3 and (len(memory_random) != 0):
 
-				# fase di scelta random tra gli step possibili
-				step_random = random.choice(memory_random)  # scelgo a caso un elemento dalla lista
-				j = step_random.id  # j, numero intero, è lo step che vado a selezionare
-				# vado ad eliminare da memory_random lo step appena scelto
-				step = 0
-				go = True
-				while go:
-					if memory_random[step].id == step_random.id:
-						del memory_random[step]
-						go = False
-					else:
-						step += 1
-				# ATTENZIONE: da qua in poi, forse ci va memory_random al posto di destroy_and_repair_steps
-				if destroy_and_repair_steps[j].carico == 0 and utils.is_next_present(j) and destroy_and_repair_steps[j].node_previous.id != destroy_and_repair_steps[j].node_next.id:
-					print('Step selected: ' + str(j))
-					# Metto volanti i task (trasferimenti)
-					for t in destroy_and_repair_steps[j].transfers:
-						# li confronto con i trasferimenti iniziali
-						for k in AppData.transfers:
-							if t.id_p == k.id_p and t.id_d == k.id_d:
-								k.delivered = False
-								k.q = t.q
-								not_delivered += t.q
-					i = j
-					n_over = 0  # step con overload
-					# while che mi permette di ridistribuire i task spachettati dallo step appena distrutto
-					while not_delivered != 0 and i < len(destroy_and_repair_steps) - 1:
-						i += 1
-						destroy_and_repair_steps[i].load += not_delivered
-						# se rispetto il vincolo della capacità
-						if destroy_and_repair_steps[i].load <= AppData.capacity:
-							# controllo se lo step ha come nodo quello eliminato
-							# i task del nodo eliminato li dobbiamo mettere nel nodo corrente
-							if destroy_and_repair_steps[i].current_node.id == destroy_and_repair_steps[j].current_node.id:
-								for transfer in destroy_and_repair_steps[j].transfers:
-									destroy_and_repair_steps[i].transfers.append(transfer)
-								# aggiornare con true la lista dei task spacchettati
-								for t in destroy_and_repair_steps[j].transfers:
-									for k in AppData.transfers:
-										if t.id_p == k.id_p and t.id_d == k.id_d:
-											k.delivered = True
-											k.q = t.q
-								not_delivered = 0
-						else:  # se sono in overload (non rispetto il vincolo della capacità)
-							# controllo se lo step ha come nodo quello eliminato
-							# i task del nodo eliminato li dobbiamo mettere nel nodo corrente
-							if destroy_and_repair_steps[i].current_node.id == destroy_and_repair_steps[j].current_node.id:
-								for transfer in destroy_and_repair_steps[j].transfers:
-									destroy_and_repair_steps[i].transfers.append(transfer)
-								# aggiornare con true la lista dei task spachettati
-								for t in destroy_and_repair_steps[j].transfers:
-									for k in AppData.transfers:
-										if t.id_p == k.id_p and t.id_d == k.id_d:
-											k.delivered = True
-											k.q = t.q
-								not_delivered = 0
-							else:
-								# calcolo costo overload
-								overload = 1 + destroy_and_repair_steps[i].load / AppData.capacity
-								# calcolo costo viaggi con overload
-								n_over += 1
-								if n_over == 1:
-									destroy_and_repair_steps[i].overload = overload * 1.05
-								elif n_over >= 3:
-									destroy_and_repair_steps[i].overload = overload * 1.20
-								elif n_over >= 5:
-									destroy_and_repair_steps[i].overload = overload * 1.50
-
-					if utils.controllo_consegne():
-						# forse list out of rqnge quindi if AppData.set_solution != 0
-						tot_l = AppData.len_set_solution[len(AppData.set_solution) - 1]
-						tot_l -= (utils.lenght(destroy_and_repair_steps[j].node_previous, destroy_and_repair_steps[j].current_node) + (utils.lenght(destroy_and_repair_steps[j].current_node, destroy_and_repair_steps[j].node_next)))
-						if n_over > 0:
-							for step in range(j, i):
-								tot_l += destroy_and_repair_steps[step].overload * (utils.lenght(destroy_and_repair_steps[j].node_previous, destroy_and_repair_steps[j].node_next))
-						else:
-							tot_l += (utils.lenght(destroy_and_repair_steps[j].node_previous, destroy_and_repair_steps[j].node_next))
-						if tot_l > AppData.total_length:
-							print('la soluzione è stata peggiorata = ' + str(tot_l))
-							fail += 1  # se arrivo a 3 allora ho un ottimo locale
-							del destroy_and_repair_steps[j]
-							# print new solution
-							for step in destroy_and_repair_steps:
-								print(step.current_node)
-							print(destroy_and_repair_steps[0].current_node)
-							# AppData.set_solution.append(destroy_and_repair_steps)
-							# AppData.len_set_solution.append(tot_l)
-						else:
-							print('la soluzione è stata migliorata = ' + str(tot_l))
-							fail = 0  # resetto i fail per verificare se questa nuova soluzione è ottimo locale
-							del destroy_and_repair_steps[j]
-							# Aggiungo la nuova lista i step a set_solution e relativa total_lenght
-							AppData.set_solution.append(destroy_and_repair_steps)
-							AppData.len_set_solution.append(tot_l)
-							# print new solution
-							for step in destroy_and_repair_steps:
-								print(step.current_node)
-							print(destroy_and_repair_steps[0].current_node)
-					else:
-						print('Errore nelle consegne: tasks non ripartizionabili!')
-
+				if stop:  # se stop è vero, cioè ho trovato trovato un miglioramento/peggioramento
+					destroy_and_repair_steps = copy.deepcopy(AppData.set_solution[x])
+					memory_random = copy.deepcopy(AppData.set_solution[x])  # steps per la random
+					del memory_random[len(memory_random) - 1]  # tolgo l'ultimo
+					del memory_random[0]  # tolgo il primo
+					del memory_random[0]  # tolgo il primo della "nuova lista" che corrisponderebbe a memory_random[1]
+					stop = False
 				else:
-					print('Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: ' + str(destroy_and_repair_steps[j].id))
+					# fase di scelta random tra gli step possibili
+					step_random = random.choice(memory_random)  # scelgo a caso un elemento dalla lista
+					j = step_random.id  # j, numero intero, è lo step che vado a selezionare
+					# vado ad eliminare da memory_random lo step appena scelto
+					step = 0
+					go = True
+					while go:
+						if memory_random[step].id == step_random.id:
+							del memory_random[step]
+							go = False
+						else:
+							step += 1
+					# ATTENZIONE: da qua in poi, forse ci va memory_random al posto di destroy_and_repair_steps
+					if destroy_and_repair_steps[j].carico == 0 and utils.is_next_present(j) and destroy_and_repair_steps[j].node_previous.id != destroy_and_repair_steps[j].node_next.id:
+						print('Step selected: ' + str(j))
+						# Metto volanti i task (trasferimenti)
+						for t in destroy_and_repair_steps[j].transfers:
+							# li confronto con i trasferimenti iniziali
+							for k in AppData.transfers:
+								if t.id_p == k.id_p and t.id_d == k.id_d:
+									k.delivered = False
+									k.q = t.q
+									not_delivered += t.q
+						i = j
+						n_over = 0  # step con overload
+						# while che mi permette di ridistribuire i task spachettati dallo step appena distrutto
+						while not_delivered != 0 and i < len(destroy_and_repair_steps) - 1:
+							i += 1
+							destroy_and_repair_steps[i].load += not_delivered
+							# se rispetto il vincolo della capacità
+							if destroy_and_repair_steps[i].load <= AppData.capacity:
+								# controllo se lo step ha come nodo quello eliminato
+								# i task del nodo eliminato li dobbiamo mettere nel nodo corrente
+								if destroy_and_repair_steps[i].current_node.id == destroy_and_repair_steps[j].current_node.id:
+									for transfer in destroy_and_repair_steps[j].transfers:
+										destroy_and_repair_steps[i].transfers.append(transfer)
+									# aggiornare con true la lista dei task spacchettati
+									for t in destroy_and_repair_steps[j].transfers:
+										for k in AppData.transfers:
+											if t.id_p == k.id_p and t.id_d == k.id_d:
+												k.delivered = True
+												k.q = t.q
+									not_delivered = 0
+							else:  # se sono in overload (non rispetto il vincolo della capacità)
+								# controllo se lo step ha come nodo quello eliminato
+								# i task del nodo eliminato li dobbiamo mettere nel nodo corrente
+								if destroy_and_repair_steps[i].current_node.id == destroy_and_repair_steps[j].current_node.id:
+									for transfer in destroy_and_repair_steps[j].transfers:
+										destroy_and_repair_steps[i].transfers.append(transfer)
+									# aggiornare con true la lista dei task spachettati
+									for t in destroy_and_repair_steps[j].transfers:
+										for k in AppData.transfers:
+											if t.id_p == k.id_p and t.id_d == k.id_d:
+												k.delivered = True
+												k.q = t.q
+									not_delivered = 0
+								else:
+									# calcolo costo overload
+									overload = destroy_and_repair_steps[i].load / AppData.capacity  # restiruisce un 1,x dove x è la % di sforamento
+									# calcolo costo viaggi con overload
+									# n_over += 1
+									if n_over == 0:
+										destroy_and_repair_steps[i].overload = overload
+									elif n_over == 1:
+										destroy_and_repair_steps[i].overload = overload * 1.05
+									elif n_over >= 3:
+										destroy_and_repair_steps[i].overload = overload * 1.20
+									elif n_over >= 5:
+										destroy_and_repair_steps[i].overload = overload * 1.50
+									n_over += 1
+
+						if utils.controllo_consegne():
+							# forse list out of rqnge quindi if AppData.set_solution != 0
+							tot_l = AppData.len_set_solution[x]  # AppData.len_set_solution[len(AppData.len_set_solution) - 1]
+							tot_l -= (utils.lenght(destroy_and_repair_steps[j].node_previous, destroy_and_repair_steps[j].current_node) + (utils.lenght(destroy_and_repair_steps[j].current_node, destroy_and_repair_steps[j].node_next)))
+							if n_over > 0:
+								tot_l += destroy_and_repair_steps[j].overload * (utils.lenght(destroy_and_repair_steps[j].node_previous, destroy_and_repair_steps[j].node_next))
+								for step in range(j+1, i):
+									tot_l -= utils.lenght(destroy_and_repair_steps[step].current_node, destroy_and_repair_steps[step].node_next)
+									tot_l += destroy_and_repair_steps[step].overload * (utils.lenght(destroy_and_repair_steps[step].current_node, destroy_and_repair_steps[step].node_next))
+							else:
+								tot_l += (utils.lenght(destroy_and_repair_steps[j].node_previous, destroy_and_repair_steps[j].node_next))
+							if tot_l > AppData.len_set_solution[x]:
+								print('la soluzione è stata peggiorata = ' + str(tot_l))
+								fail += 1  # se arrivo a 3 allora ho un ottimo locale
+								del destroy_and_repair_steps[j]
+								# aggiustamento della soluzione
+								for h in range(j, len(destroy_and_repair_steps)):
+									destroy_and_repair_steps[h].id -= 1
+								destroy_and_repair_steps[j - 1].node_next = destroy_and_repair_steps[j].current_node
+								destroy_and_repair_steps[j].node_previous = destroy_and_repair_steps[j-1].current_node
+								# print new solution
+								for step in destroy_and_repair_steps:
+									print(step.current_node)
+								print(destroy_and_repair_steps[0].current_node)
+								AppData.set_solution.append(destroy_and_repair_steps)
+								AppData.len_set_solution.append(tot_l)
+								# vado a mettere True stop perchè ho aggiornato set_solution e aumento di 1 il numero di aggiornamenti
+								x += 1
+								stop = True
+							else:
+								print('la soluzione è stata migliorata = ' + str(tot_l))
+								fail = 0  # resetto i fail per verificare se questa nuova soluzione è ottimo locale
+								del destroy_and_repair_steps[j]
+								# aggiustamento della soluzione
+								for h in range(j, len(destroy_and_repair_steps)):
+									destroy_and_repair_steps[h].id -= 1
+								destroy_and_repair_steps[j - 1].node_next = destroy_and_repair_steps[j].current_node
+								destroy_and_repair_steps[j].node_previous = destroy_and_repair_steps[j - 1].current_node
+								# Aggiungo la nuova lista i step a set_solution e relativa total_lenght
+								AppData.set_solution.append(destroy_and_repair_steps)
+								AppData.len_set_solution.append(tot_l)
+								# print new solution
+								for step in destroy_and_repair_steps:
+									print(step.current_node)
+								print(destroy_and_repair_steps[0].current_node)
+								x += 1
+								stop = True
+						else:
+							print('Errore nelle consegne: tasks non ripartizionabili!')
+
+					else:
+						print('Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: ' + str(destroy_and_repair_steps[j].id))
 
 			# ultimo errore distanze dovuto a che non modifichiamo appData.Totoal_lenght
 
