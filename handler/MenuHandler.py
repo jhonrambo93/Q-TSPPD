@@ -365,9 +365,9 @@ class MenuHandler:
 					else:
 						print('Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: ' + str(destroy_and_repair_steps[j].id))
 
-			# ultimo errore distanze dovuto a che non modifichiamo appData.Totoal_lenght
-
-			# controllare se gli step vengono aggiornati bene o meno
+			# caso di ottimo locale
+			if fail == 3:
+				print('Questo test di destroy_and_repair porta ad un ottimo locale, perchè ho ottenuto ' + str(fail) + ' soluzioni peggiorate consecutive!')
 
 		if choice == "GREEDY_BY_VALUE":
 			# initialization
