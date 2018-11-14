@@ -115,8 +115,8 @@ def controllo_consegne() -> bool:
 
 # funzione che trova la soluzione ottima tra le tante ottunute con le euristiche di miglioramento
 def get_best_solution() -> (list, float):
-	minimum_solution = None
-	steps_best_solution = []
+	minimum_solution = None  # distanza
+	steps_best_solution = []  # soluzione
 	for s in AppData.len_set_solution:
 		l = s
 		if minimum_solution is None:
