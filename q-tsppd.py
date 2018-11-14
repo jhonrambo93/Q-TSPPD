@@ -26,7 +26,7 @@ if __name__ == '__main__':
 	f.close()
 
 	# read transfers file
-	f = open('transfers.txt', 'r')
+	f = open('transfers0.txt', 'r')
 	for line in f:
 		parts = line.split()
 		AppData.transfers.append(Transfer(int(parts[0]), int(parts[1]), int(parts[2]), False))

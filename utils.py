@@ -9,7 +9,7 @@ def lenght(node_1: Node, node_2: Node) -> float:
 
 
 # Funzione ammissibilità nodo successivo
-def abmissibility_greedy(node: Node, load: int, nodes_in_solution: list) -> bool:
+def abmissibility_greedy(node: Node, nodes_in_solution: list) -> bool:
 	if node.q_p == 0 and node.q_d == 0:
 		return False
 	else:
@@ -50,7 +50,6 @@ def get_nearest_node(border: list, minimum_length: float) -> Node:
 		elif l < minimum_length:
 			minimum_length = l
 			nearest_n = n_f
-	AppData.current_node = nearest_n
 	AppData.total_length += minimum_length
 	return nearest_n
 
@@ -89,3 +88,27 @@ def get_value(n_f: Node, load: int) -> float:
 		carico = n_f.q_p - scarto
 
 	return ((load - scarico + carico) / AppData.capacity) / lenght(AppData.current_node, n_f)
+
+
+# funzione per vedere se un nodo è presente nella soluzione dopo un determinato punto di taglio
+def is_next_present(j: int) -> bool:
+	counter = 0
+	for s in range((j + 1), len(AppData.steps)):
+		if AppData.steps[j].current_node == AppData.steps[s].current_node:
+			counter += 1
+	if counter > 0:
+		return True
+	else:
+		return False
+
+
+# funzione controllo consegne
+def controllo_consegne() -> bool:
+	counter_transfer = 0
+	for t in AppData.transfers:
+		if t.delivered == True:
+			counter_transfer += 1
+	if counter_transfer == len(AppData.transfers):
+		return True
+	else:
+		return False
