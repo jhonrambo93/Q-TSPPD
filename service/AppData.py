@@ -26,5 +26,12 @@ class AppData:
     # nodi che sono nella soluzione
     nodes_in_solution = []
 
+    # greedy_solution's memory
     # node_previous, node_next, border, transfers, load, carico
     steps = []
+
+    # set of steps list
+    set_solution = []
+
+    # steps length of set_solution
+    len_set_solution = []
