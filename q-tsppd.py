@@ -17,7 +17,7 @@ if __name__ == '__main__':
 	print('  /////// //           //     ////////  //       //       ///////   ')
 
 	# read nodes file
-	f = open('nodes.txt', 'r')
+	f = open('nodes2.txt', 'r')
 	for line in f:
 		parts = line.split()
 		AppData.nodes.append(Node(int(parts[0]), float(parts[1]), float(parts[2])))
@@ -26,7 +26,7 @@ if __name__ == '__main__':
 	f.close()
 
 	# read transfers file
-	f = open('transfers0.txt', 'r')
+	f = open('transfers2.txt', 'r')
 	for line in f:
 		parts = line.split()
 		AppData.transfers.append(Transfer(int(parts[0]), int(parts[1]), int(parts[2]), False))

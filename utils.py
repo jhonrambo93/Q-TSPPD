@@ -13,7 +13,7 @@ def abmissibility_greedy(node: Node, nodes_in_solution: list) -> bool:
 	if node.q_p == 0 and node.q_d == 0:
 		return False
 	else:
-		if (is_destination(node, nodes_in_solution)):
+		if is_destination(node, nodes_in_solution):
 			return True
 		else:
 			return False
@@ -21,12 +21,12 @@ def abmissibility_greedy(node: Node, nodes_in_solution: list) -> bool:
 
 # funzione che controlla se nel nodo corrente devo scaricare
 def is_destination(node: Node, nodes_in_solution: list) -> bool:
-	AppData.q_d_n = 0  #quantitàdelivery effettiva
+	AppData.q_d_n = 0  # quantità delivery effettiva
 	for n_s in nodes_in_solution:
 		for t in AppData.transfers:
 			if t.delivered is False and n_s.id == t.id_p and n_s.furgone != 0:
 				if t.id_d == node.id:
-					#AppData.q_d_n = t.q
+					# AppData.q_d_n = t.q
 					return True
 	return False
 
@@ -43,7 +43,6 @@ def complete_deliveries(total_deliveries: int) -> bool:
 def get_nearest_node(border: list, minimum_length: float) -> Node:
 	for n_f in border:
 		l = lenght(AppData.current_node, n_f)
-		# print(l)
 		if minimum_length is None:
 			minimum_length = l
 			nearest_n = n_f
@@ -67,9 +66,9 @@ def get_best_node(border: list, max_value: float, load: int) -> Node:
 	AppData.current_node = best_n
 	return best_n
 
+
 # funzione valore
 def get_value(n_f: Node, load: int) -> float:
-	#print('\nSCARICO')
 	scarico = 0
 	for s in AppData.nodes_in_solution:
 		for t in AppData.transfers:
@@ -106,9 +105,24 @@ def is_next_present(j: int) -> bool:
 def controllo_consegne() -> bool:
 	counter_transfer = 0
 	for t in AppData.transfers:
-		if t.delivered == True:
+		if t.delivered:
 			counter_transfer += 1
 	if counter_transfer == len(AppData.transfers):
 		return True
 	else:
 		return False
+
+
+# funzione che trova la soluzione ottima tra le tante ottunute con le euristiche di miglioramento
+def get_best_solution() -> (list, float):
+	minimum_solution = None  # distanza
+	steps_best_solution = []  # soluzione
+	for s in range(0, len(AppData.len_set_solution)):
+		l = AppData.len_set_solution[s]
+		if minimum_solution is None:
+			minimum_solution = l
+			steps_best_solution = AppData.set_solution[s]
+		elif l < minimum_solution:
+			minimum_solution = l
+			steps_best_solution = AppData.set_solution[s]
+	return steps_best_solution, minimum_solution
