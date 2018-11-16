@@ -53,6 +53,7 @@ def get_nearest_node(border: list, minimum_length: float) -> Node:
 	return nearest_n
 
 
+# funzione che trova il nodo migliore seccondo la funzione get_value
 def get_best_node(border: list, max_value: float, load: int) -> Node:
 	for n_f in border:
 		value = get_value(n_f, load)
@@ -63,11 +64,9 @@ def get_best_node(border: list, max_value: float, load: int) -> Node:
 			max_value = value
 			best_n = n_f
 	AppData.total_length += lenght(AppData.current_node, best_n)
-	AppData.current_node = best_n
 	return best_n
 
 
-# funzione valore
 def get_value(n_f: Node, load: int) -> float:
 	scarico = 0
 	for s in AppData.nodes_in_solution:
@@ -87,6 +86,55 @@ def get_value(n_f: Node, load: int) -> float:
 		carico = n_f.q_p - scarto
 
 	return ((load - scarico + carico) / AppData.capacity) / lenght(AppData.current_node, n_f)
+
+
+# funzione che trova il nodo migliore seccondo la funzione get_value_2
+def get_best_node_2(border: list, max_value: float, load: int) -> Node:
+	for n_f in border:
+		value = get_value_2(n_f, load)
+		if max_value is None:
+			max_value = value
+			best_n = n_f
+		elif value > max_value:
+			max_value = value
+			best_n = n_f
+	AppData.total_length += lenght(AppData.current_node, best_n)
+	return best_n
+
+
+def get_value_2(n_f: Node, load: int) -> float:
+	scarico = 0
+	counter: int = 0
+	function_value: float = 0
+	for s in AppData.nodes_in_solution:
+		for t in AppData.transfers:
+			if (t.id_d == n_f.id) and (t.delivered is False) and (t.id_p == s.id):
+				epsilon = AppData.initial_nodes[t.id_p].q_p - AppData.nodes[t.id_p].q_p
+				if epsilon >= t.q:
+					scarico = t.q
+				else:
+					scarico = epsilon
+	q = load - scarico + n_f.q_p
+	if q <= AppData.capacity:
+		carico = n_f.q_p
+	else:
+		scarto = q - AppData.capacity
+		carico = n_f.q_p - scarto
+
+	# conto a quanti nodi deve trasportare il nodo n_f
+	for transfer in AppData.transfers:
+		if n_f == transfer.id_p and not transfer.delivered:
+			counter += 1
+	# valore di quanto incidono i trasferimenti che devono ancoara essere eseguiti
+	transfers_value = counter/AppData.capacity
+	#valore di quanto indide il caricamento completo del furgone
+	furgone_load_value = (load - scarico - carico)/AppData.capacity
+	# distanza tra i nodi
+	distanza = lenght(n_f, AppData.current_node)
+	#valore finale
+	function_value = (transfers_value*1.5 + furgone_load_value*1)/(distanza*1)
+
+	return function_value
 
 
 # funzione per vedere se un nodo è presente nella soluzione dopo un determinato punto di taglio

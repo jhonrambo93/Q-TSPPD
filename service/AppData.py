@@ -35,3 +35,6 @@ class AppData:
 
     # steps length of set_solution
     len_set_solution = []
+
+    # contatore delle ripetizioni della D&R a partire da una Greedy
+    DR_counter = 0
