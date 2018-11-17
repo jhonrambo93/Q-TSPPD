@@ -1,6 +1,40 @@
 from service.AppData import AppData
 from node.Node import Node
+from transfer.Transfer import Transfer
 import math
+
+
+# read nodes files
+def read_nodes_file() -> None:
+	f = open(AppData.file_nodes, 'r')
+	for line in f:
+		parts = line.split()
+		AppData.nodes.append(Node(int(parts[0]), float(parts[1]), float(parts[2])))
+	# for node in AppData.nodes:
+	# print(node)
+	f.close()
+
+
+# read transfers file
+def read_transfers_file() -> None:
+	f = open(AppData.file_transfers, 'r')
+	for line in f:
+		parts = line.split()
+		AppData.transfers.append(Transfer(int(parts[0]), int(parts[1]), int(parts[2]), False))
+	# for transfer in AppData.transfers:
+	# print(transfer)
+	f.close()
+
+
+# upgrade nodes list
+def upgrade_nodes_list() -> None:
+	for node in AppData.nodes:
+		if node.id != 0:
+			for transfer in AppData.transfers:
+				if transfer.id_p == node.id:
+					node.q_p = node.q_p + transfer.q
+				elif transfer.id_d == node.id:
+					node.q_d = node.q_d + transfer.q
 
 
 # Euclidean distance function

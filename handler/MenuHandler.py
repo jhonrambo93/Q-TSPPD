@@ -13,6 +13,7 @@ class MenuHandler:
 		if choice == "GREEDY":
 
 			# initialization
+			AppData.total_length = 0
 			step = 0
 			border = []  # possibili nodi raggiungibili
 			solution = []  # elenco dei nodi che compongono la soluzione, cioè il viaggio del furgoncino
@@ -216,6 +217,7 @@ class MenuHandler:
 
 		if choice == "GREEDY_RANDOM":
 			# initialization
+			AppData.total_length = 0
 			step = 0
 			border = []  # possibili nodi raggiungibili
 			solution = []  # elenco dei nodi che compongono la soluzione, cioè il viaggio del furgoncino
@@ -290,8 +292,7 @@ class MenuHandler:
 				print('-----------------------------------------')
 
 				for node in AppData.nodes:
-					if node.id != 0 and node.id != AppData.current_node.id and utils.abmissibility_greedy(node,
-																										  AppData.nodes_in_solution):
+					if node.id != 0 and node.id != AppData.current_node.id and utils.abmissibility_greedy(node, AppData.nodes_in_solution):
 						border.append(node)
 
 				# to avoid deadlock
@@ -322,9 +323,7 @@ class MenuHandler:
 
 				# #########################step 2 primo aggiornamento##########################################
 				# id - corrente - nodo_prima - nodo_next - border - transfers - load
-				AppData.steps.append(
-					Step(step, AppData.current_node, AppData.steps[step - 1].current_node, None, list(), list(), load,
-						 0, 1))
+				AppData.steps.append(Step(step, AppData.current_node, AppData.steps[step - 1].current_node, None, list(), list(), load, 0, 1))
 				# #############################################################################################
 				minimum_length = None
 				print('nodo più vicino, scelto: ' + str(nearest_n))
@@ -433,6 +432,7 @@ class MenuHandler:
 
 		if choice == "GREEDY_BY_VALUE":
 			# initialization
+			AppData.total_length = 0
 			step = 0
 			border = []  # possibili nodi raggiungibili
 			solution = []  # elenco dei nodi che compongono la soluzione, cioè il viaggio del furgoncino
@@ -811,3 +811,41 @@ class MenuHandler:
 
 			# incremento di 1 il numero di Destroy and Repair eseguite
 			AppData.DR_counter += 1
+
+		if choice == "GRASP":
+			MenuHandler.function_grasp(self)
+
+	def function_grasp(self):
+			grasp_set_solition = []
+			grasp_len_set_solution = []
+			N: int = 0
+			# repet for N times:
+			while N < 10:
+				print("Ripetizione Grasp numero: " + str(N))
+				# rum greedy_random 1 volta:
+				MenuHandler.serve(self, 'GREEDY_RANDOM')
+				# run destroy_and_repair 1 volta:
+				MenuHandler.serve(self, 'DESTROY_AND_REPAIR')
+				# insert result in 2 apposite list:
+				for solution in AppData.set_solution:
+					grasp_set_solition.append(solution)
+				for len_solution in AppData.len_set_solution:
+					grasp_len_set_solution.append(len_solution)
+				# vari clear e reset per far ripartire in modo corretto la greedy-random, quindi la grasp
+				AppData.steps.clear()
+				AppData.nodes_in_solution.clear()
+				AppData.q_d_n = 0
+				AppData.current_node = None
+				AppData.set_solution.clear()
+				AppData.len_set_solution.clear()
+				AppData.nodes.clear()
+				AppData.initial_nodes.clear()
+				AppData.transfers.clear()
+				N += 1
+				utils.read_nodes_file()
+				utils.read_transfers_file()
+				utils.upgrade_nodes_list()
+			# avviare una funzione che controllo il risultato migliore e lo faccia vedere a video
+			# manca l'implementazione, molto simile a quella fatta per la destroy_and_repair!
+			print("\nEnd Of Grasp!\n")
+
