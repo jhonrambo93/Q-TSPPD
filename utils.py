@@ -196,15 +196,17 @@ def controllo_consegne() -> bool:
 
 
 # funzione che trova la soluzione ottima tra le tante ottunute con le euristiche di miglioramento
-def get_best_solution() -> (list, float):
+def get_best_solution(set_sol: list, len_set_sol: list) -> (list, float):
 	minimum_solution = None  # distanza
 	steps_best_solution = []  # soluzione
-	for s in range(0, len(AppData.len_set_solution)):
-		l = AppData.len_set_solution[s]
+	for s in range(0, len(len_set_sol)):
+		l = len_set_sol[s]
 		if minimum_solution is None:
 			minimum_solution = l
-			steps_best_solution = AppData.set_solution[s]
+			steps_best_solution = set_sol[s]
 		elif l < minimum_solution:
 			minimum_solution = l
-			steps_best_solution = AppData.set_solution[s]
+			steps_best_solution = set_sol[s]
 	return steps_best_solution, minimum_solution
+
+

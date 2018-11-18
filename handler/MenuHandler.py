@@ -800,13 +800,13 @@ class MenuHandler:
 			if fail == 3:
 				print('Questo test di destroy_and_repair porta ad un ottimo locale, perchè ho ottenuto ' + str(fail) + ' soluzioni peggiorate consecutive!')
 
-			if utils.get_best_solution()[1] < AppData.len_set_solution[0]:
+			if utils.get_best_solution(AppData.set_solution, AppData.len_set_solution)[1] < AppData.len_set_solution[0]:
 				# soluzione ottimizzata
-				print('La soluzione ottimizzata dalla destroy & repair è: ' + str(utils.get_best_solution()[1]))
+				print('La soluzione ottimizzata dalla destroy & repair è: ' + str(utils.get_best_solution(AppData.set_solution, AppData.len_set_solution)[1]))
 			else:
 				print('La destroy & repair non è stata in grado di miglioare la soluzione della greedy!')
 			print('Solution:')
-			for count, step in enumerate(utils.get_best_solution()[0], 0):
+			for count, step in enumerate(utils.get_best_solution(AppData.set_solution, AppData.len_set_solution)[0], 0):
 				print(f'{count} --> ' + str(step.current_node.id))
 
 			# incremento di 1 il numero di Destroy and Repair eseguite
@@ -835,17 +835,22 @@ class MenuHandler:
 				AppData.steps.clear()
 				AppData.nodes_in_solution.clear()
 				AppData.q_d_n = 0
-				AppData.current_node = None
+				# AppData.current_node = None
 				AppData.set_solution.clear()
 				AppData.len_set_solution.clear()
+				# AppData.initial_nodes.clear()
 				AppData.nodes.clear()
-				AppData.initial_nodes.clear()
-				AppData.transfers.clear()
-				N += 1
 				utils.read_nodes_file()
+				AppData.transfers.clear()
 				utils.read_transfers_file()
 				utils.upgrade_nodes_list()
+				N += 1
+
 			# avviare una funzione che controllo il risultato migliore e lo faccia vedere a video
-			# manca l'implementazione, molto simile a quella fatta per la destroy_and_repair!
+			print('La migliore soluzione è: ' + str(utils.get_best_solution(grasp_set_solition, grasp_len_set_solution)[1]))
+			print('Node solution:')
+			for count, step in enumerate(utils.get_best_solution(grasp_set_solition, grasp_len_set_solution)[0], 0):
+				print(f'{count} --> ' + str(step.current_node.id))
+
 			print("\nEnd Of Grasp!\n")
 
