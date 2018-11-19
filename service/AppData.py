@@ -2,6 +2,12 @@
 
 class AppData:
 
+    # nome file nodes
+    file_nodes: str = None
+
+    # nome file transfers
+    file_transfers: str = None
+
     # ('id', 'x', 'y', 'q_p', 'q_d')
     nodes = []
 
@@ -21,7 +27,7 @@ class AppData:
     current_node = None
 
     # total length
-    total_length = 0
+    total_length: int
 
     # nodi che sono nella soluzione
     nodes_in_solution = []

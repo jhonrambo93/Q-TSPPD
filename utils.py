@@ -1,6 +1,40 @@
 from service.AppData import AppData
 from node.Node import Node
+from transfer.Transfer import Transfer
 import math
+
+
+# read nodes files
+def read_nodes_file() -> None:
+	f = open(AppData.file_nodes, 'r')
+	for line in f:
+		parts = line.split()
+		AppData.nodes.append(Node(int(parts[0]), float(parts[1]), float(parts[2])))
+	# for node in AppData.nodes:
+	# print(node)
+	f.close()
+
+
+# read transfers file
+def read_transfers_file() -> None:
+	f = open(AppData.file_transfers, 'r')
+	for line in f:
+		parts = line.split()
+		AppData.transfers.append(Transfer(int(parts[0]), int(parts[1]), int(parts[2]), False))
+	# for transfer in AppData.transfers:
+	# print(transfer)
+	f.close()
+
+
+# upgrade nodes list
+def upgrade_nodes_list() -> None:
+	for node in AppData.nodes:
+		if node.id != 0:
+			for transfer in AppData.transfers:
+				if transfer.id_p == node.id:
+					node.q_p = node.q_p + transfer.q
+				elif transfer.id_d == node.id:
+					node.q_d = node.q_d + transfer.q
 
 
 # Euclidean distance function
@@ -132,7 +166,7 @@ def get_value_2(n_f: Node, load: int) -> float:
 	# distanza tra i nodi
 	distanza = lenght(n_f, AppData.current_node)
 	#valore finale
-	function_value = (transfers_value*1.5 + furgone_load_value*1)/(distanza*1)
+	function_value = (transfers_value*1 + furgone_load_value*1)/(distanza*1)
 
 	return function_value
 
@@ -162,15 +196,17 @@ def controllo_consegne() -> bool:
 
 
 # funzione che trova la soluzione ottima tra le tante ottunute con le euristiche di miglioramento
-def get_best_solution() -> (list, float):
+def get_best_solution(set_sol: list, len_set_sol: list) -> (list, float):
 	minimum_solution = None  # distanza
 	steps_best_solution = []  # soluzione
-	for s in range(0, len(AppData.len_set_solution)):
-		l = AppData.len_set_solution[s]
+	for s in range(0, len(len_set_sol)):
+		l = len_set_sol[s]
 		if minimum_solution is None:
 			minimum_solution = l
-			steps_best_solution = AppData.set_solution[s]
+			steps_best_solution = set_sol[s]
 		elif l < minimum_solution:
 			minimum_solution = l
-			steps_best_solution = AppData.set_solution[s]
+			steps_best_solution = set_sol[s]
 	return steps_best_solution, minimum_solution
+
+
