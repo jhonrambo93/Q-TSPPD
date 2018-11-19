@@ -166,7 +166,7 @@ def get_value_2(n_f: Node, load: int) -> float:
 	# distanza tra i nodi
 	distanza = lenght(n_f, AppData.current_node)
 	#valore finale
-	function_value = (transfers_value*1.5 + furgone_load_value*1)/(distanza*1)
+	function_value = (transfers_value*1 + furgone_load_value*1)/(distanza*1)
 
 	return function_value
 

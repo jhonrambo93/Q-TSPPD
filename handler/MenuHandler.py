@@ -808,14 +808,12 @@ class MenuHandler:
 			print('Solution:')
 			for count, step in enumerate(utils.get_best_solution(AppData.set_solution, AppData.len_set_solution)[0], 0):
 				print(f'{count} --> ' + str(step.current_node.id))
+			print(f'{count+1} --> 0 ')
 
 			# incremento di 1 il numero di Destroy and Repair eseguite
 			AppData.DR_counter += 1
 
 		if choice == "GRASP":
-			MenuHandler.function_grasp(self)
-
-	def function_grasp(self):
 			grasp_set_solition = []
 			grasp_len_set_solution = []
 			N: int = 0
@@ -828,7 +826,7 @@ class MenuHandler:
 				MenuHandler.serve(self, 'DESTROY_AND_REPAIR')
 				# insert result in 2 apposite list:
 				for solution in AppData.set_solution:
-					grasp_set_solition.append(solution)
+					grasp_set_solition.append(copy.deepcopy(solution))
 				for len_solution in AppData.len_set_solution:
 					grasp_len_set_solution.append(len_solution)
 				# vari clear e reset per far ripartire in modo corretto la greedy-random, quindi la grasp
@@ -847,10 +845,19 @@ class MenuHandler:
 				N += 1
 
 			# avviare una funzione che controllo il risultato migliore e lo faccia vedere a video
-			print('La migliore soluzione è: ' + str(utils.get_best_solution(grasp_set_solition, grasp_len_set_solution)[1]))
-			print('Node solution:')
-			for count, step in enumerate(utils.get_best_solution(grasp_set_solition, grasp_len_set_solution)[0], 0):
-				print(f'{count} --> ' + str(step.current_node.id))
+			print("\nEnd Of Grasp:\n")
+			print('Best solution:')
+			# first version of print:
+			# for count, step in enumerate(utils.get_best_solution(grasp_set_solition, grasp_len_set_solution)[0], 0):
+			#	print(f'{count} --> ' + str(step.current_node.id))
+			# print(f'{count+1} --> 0 ')
+			# second version of print: (sistemare il for)
+			for step in utils.get_best_solution(grasp_set_solition, grasp_len_set_solution)[0]:
+				print(str(step.current_node.id), end=' -> ')
+			print('0 ')
+			print('Length = ', round(utils.get_best_solution(grasp_set_solition, grasp_len_set_solution)[1], 3))
 
-			print("\nEnd Of Grasp!\n")
+
+
+
 

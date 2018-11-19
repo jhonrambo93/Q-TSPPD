@@ -2,6 +2,8 @@ from service.AppData import AppData
 from service.Menu import Menu
 from handler.MenuHandler import MenuHandler
 import utils
+import networkx as nx
+import matplotlib.pylab as plt
 
 
 if __name__ == '__main__':
@@ -26,6 +28,7 @@ if __name__ == '__main__':
 	# upgrade nodes list
 	utils.upgrade_nodes_list()
 
+	
 	# for node in AppData.nodes:
 	# print(node)
 
