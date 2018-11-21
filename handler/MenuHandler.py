@@ -12,14 +12,13 @@ class MenuHandler:
 
 		if choice == "GREEDY":
 
-			# initialization
+			# init
 			AppData.total_length = 0
 			step = 0
 			border = []  # possibili nodi raggiungibili
 			solution = []  # elenco dei nodi che compongono la soluzione, cioè il viaggio del furgoncino
 			total_deliveries = 0  # totale consegne portate a termine
 			load = 0  # carico nel furgone
-			# unload = bool  # serve per stampare a video scaricato
 			minimum_length = None
 			AppData.initial_nodes = copy.deepcopy(AppData.nodes)  # copio la lista nodes in initial_nodes
 
@@ -27,6 +26,8 @@ class MenuHandler:
 			# Step 0
 			AppData.current_node = AppData.nodes[0]  # impongo che il nodo iniziale è il nodo 0
 			solution.append(AppData.current_node)
+			# Generarione Immagine della soluzione parziale
+			# utils.images_sol_generation(solution)
 
 			for node in AppData.nodes:
 				if node.q_p != 0:
@@ -34,20 +35,22 @@ class MenuHandler:
 
 			# Step 1
 			step += 1
-			print('\nStep ' + str(step))
+			print('\nStep: ' + str(step))
 
-			print('Calcolo delle distanze rispetto i nodi del border ...')
+			print('Calcolo delle distanze rispetto i nodi del border ... ')
 
 			# trovo il nodo più vicino
 			nearest_n = utils.get_nearest_node(border, minimum_length)
 			solution.append(nearest_n)
 			AppData.nodes_in_solution.append(nearest_n)
+			# Generarione Immagine della soluzione parziale
+			# utils.images_sol_generation(solution)
 
-			# ##################### Salvo ciò che viene fatto allo step 0 ##########################################
+			# ############################# Salvo ciò che viene fatto allo step 0 #####################################
 			AppData.steps.append(Step(0, AppData.current_node, None, nearest_n, copy.deepcopy(border), list(), 0, 0, 1))
-			# ######################################################################################################
+			# #########################################################################################################
 
-			# aggiono il nodo corrente, corrispondente allo step 1
+			# aggiorno il nodo corrente, corrispondente allo step 1
 			AppData.current_node = nearest_n
 
 			minimum_length = None
@@ -61,26 +64,18 @@ class MenuHandler:
 				exit()
 
 			print('Nodo corrente:' + str(AppData.current_node))
-			print('Quantità nel furgone, al primo carico dopo il nodo 0: ' + str(load))
+			print('Quantità nel furgone: ' + str(load))
 
 			border.clear()
 
-			# Salvo ciò che viene fatto allo step 1
-			# id - corrente - nodo_prima - nodo_next - border - transfers - load
+			# ##################################Salvo ciò che viene fatto allo step 1##################################
 			AppData.steps.append(Step(1, AppData.current_node, AppData.steps[0].current_node, None, list(), list(), load, load, 1))
+			# #########################################################################################################
 
 			# Other steps
 			while utils.complete_deliveries(total_deliveries):
 				step += 1
-				print('\nStep ' + str(step))
-
-				print('-----------------nodes-------------------')
-				for node in AppData.nodes:
-					print(node)
-				print('-------------initial_node----------------')
-				for node in AppData.initial_nodes:
-					print(node)
-				print('-----------------------------------------')
+				print('\nStep: ' + str(step))
 
 				for node in AppData.nodes:
 					if node.id != 0 and node.id != AppData.current_node.id and utils.abmissibility_greedy(node, AppData.nodes_in_solution):
@@ -102,34 +97,31 @@ class MenuHandler:
 				solution.append(nearest_n)
 				if nearest_n not in AppData.nodes_in_solution:
 					AppData.nodes_in_solution.append(nearest_n)
+				# Generarione Immagine della soluzione parziale
+				# utils.images_sol_generation(solution)
 
-				# ###########Aggiorno border e nearest node dello step 1################
+				# ###########Aggiorno border e nearest node dello step 1###############################################
 				AppData.steps[step-1].border = copy.deepcopy(border)
 				AppData.steps[step-1].node_next = nearest_n
-				# ######################################################################
+				# #####################################################################################################
 
 				AppData.current_node = nearest_n
 
 				# #########################step 2 primo aggiornamento##########################################
-				# id - corrente - nodo_prima - nodo_next - border - transfers - load
 				AppData.steps.append(Step(step, AppData.current_node, AppData.steps[step-1].current_node, None, list(), list(), load, 0, 1))
 				# #############################################################################################
-				minimum_length = None
-				print('nodo più vicino, scelto: ' + str(nearest_n))
 
-				# epsilon = 0
+				minimum_length = None
+				print('Nodo scelto: ' + str(nearest_n))
+
 				# scarico il furgone della quantità del nodo corrente, se deve ricevere dal nodo corrente
 				print('\nFASE DI SCARICO')
 				unload = False
 				for s in AppData.nodes_in_solution:
 					for t in AppData.transfers:
 						if (t.id_d == AppData.current_node.id) and (t.delivered is False) and (t.id_p == s.id):
-							# print("id nodeo di pickup t.id_p = " + str(t.id_p))
-							# print("initial_node_q_p= " + str(AppData.initial_nodes[t.id_p].q_p))
-							# print("node_q_p= " + str(AppData.nodes[t.id_p].q_p))
 							epsilon = AppData.initial_nodes[t.id_p].q_p - AppData.nodes[t.id_p].q_p
 							if epsilon >= t.q:
-								# print("epsilon = " + str(epsilon) + " t.q = " + str(t.q))
 								load = load - t.q
 								AppData.nodes[t.id_p].furgone -= t.q
 								AppData.nodes[AppData.current_node.id].q_d -= t.q
@@ -144,18 +136,18 @@ class MenuHandler:
 								total_deliveries += 1
 
 							else:  # if epsilon < t.q
-								# print("epsilon = " + str(epsilon) + "t.q = " + str(t.q))
 								load = load - epsilon
 								AppData.nodes[t.id_p].furgone -= epsilon
 								AppData.nodes[AppData.current_node.id].q_d -= epsilon
 								AppData.initial_nodes[t.id_p].q_p -= epsilon
 								t.q -= epsilon
 								# ####################################################################
-								AppData.steps[step].transfers.append(copy.deepcopy(t))  # metto il task in coda ai task dello step
-								# len(AppData.steps[step].transfers): quanti task ho nello step
+								# metto il task in coda ai task dello step
+								AppData.steps[step].transfers.append(copy.deepcopy(t))
 								# al task corrente vado a mettergli il corretto q rimasto
 								AppData.steps[step].transfers[len(AppData.steps[step].transfers) - 1].q = epsilon
 								# ####################################################################
+
 								print('Quantità scaricata = ', epsilon)
 
 							unload = True
@@ -163,7 +155,6 @@ class MenuHandler:
 				if not unload:
 					print('Quantità scaricata = 0')
 
-				print('\nQuantità nel furgone:' + str(load))
 				# carico il furgone della quantità del nodo corrente, se possibile
 				print('FASE DI CARICO')
 				load += AppData.current_node.q_p
@@ -184,14 +175,13 @@ class MenuHandler:
 					AppData.steps[step].carico = carico
 					# ##############################################
 
-				# print('Nodo corrente, prima di ripetere il while:' + str(AppData.current_node))
 				print('\nQuantità nel furgone:' + str(load))
 
 				# #################################
 				AppData.steps[step].load = load
 				# #################################
 
-				print('Stato consegne')
+				print('Stato consegne: ')
 				for t in AppData.transfers:
 					print(t)
 
@@ -201,19 +191,25 @@ class MenuHandler:
 			# ritorno al deposito
 			solution.append(AppData.nodes[0])
 			# risultato soluzione
+			print('SOLUZIONE: ')
 			print('\nDistanza totale = ' + str(AppData.total_length))
-			print('Nodi nella soluzione:')
+			print('Sequenza nodi soluzione:')
 			for node in solution:
 				print(node)
 
 			# ###########Aggiorno next node del penultimo step (prima del ritorno al deposito)################
 			AppData.steps[step].node_next = solution[0]
-			# ######################################################################
+			# ################################################################################################
 
 			# Inserisco gli step della soluzione della greedy come primo elemento nella set_solutione
 			# e relativa lunghezza in len_set_solution
 			AppData.set_solution.append(AppData.steps)
 			AppData.len_set_solution.append(AppData.total_length)
+
+			# ***************** Generarione Immagine della soluzione definitiva *******************
+			utils.images_sol_generation(solution)
+			# *************************************************************************************
+
 
 		if choice == "GREEDY_RANDOM":
 			# initialization
@@ -818,7 +814,7 @@ class MenuHandler:
 			grasp_len_set_solution = []
 			N: int = 0
 			# repet for N times:
-			while N < 10:
+			while N < 100:
 				print("Ripetizione Grasp numero: " + str(N))
 				# rum greedy_random 1 volta:
 				MenuHandler.serve(self, 'GREEDY_RANDOM')

@@ -2,6 +2,8 @@ from service.AppData import AppData
 from node.Node import Node
 from transfer.Transfer import Transfer
 import math
+import matplotlib.pylab as plt
+import numpy as np
 
 
 # read nodes files
@@ -209,4 +211,47 @@ def get_best_solution(set_sol: list, len_set_sol: list) -> (list, float):
 			steps_best_solution = set_sol[s]
 	return steps_best_solution, minimum_solution
 
+
+# funzione creazione immagini
+def images_sol_generation(solution: list):
+
+	# init
+	all_nodes = AppData.nodes[:]
+	d = all_nodes[0]
+	x_max = 0
+	y_max = 0
+
+	# linea
+	line = [(n.x, n.y) for n in solution]
+	line = np.array(line)
+	plt.plot(line[:, 0], line[:, 1], linestyle='-', color='green')
+
+	# deposito
+	deposito = [(d.x, d.y)]
+	deposito = np.array(deposito)
+	all_nodes.remove(all_nodes[0])
+	# citta
+	nodo = [(n.x, n.y) for n in all_nodes]
+	nodo = np.array(nodo)
+	plt.plot(deposito[0, 0], deposito[0, 1], 'bD', nodo[:, 0], nodo[:, 1], 'ro')
+
+	# configurazione del grafico
+	plt.xlabel('X')
+	plt.ylabel('Y')
+	# imposto le dimensioni del grafico
+	for n in AppData.nodes:
+		if n.x > x_max:
+			x_max = n.x
+		if n.y > y_max:
+			y_max = n.y
+	x_max = x_max * 1.4
+	y_max = y_max * 1.4
+	plt.axis([0, x_max, 0, y_max])
+	plt.axis('on')  # ???
+	plt.grid()
+	plt.title('Soluzione')
+	# creazione immagine grafo
+	plt.savefig('images/solution/Soluzione_' + str(len(solution) - 1) + '.png')
+	# visualizzazione nel video del grafo
+	# plt.show()
 

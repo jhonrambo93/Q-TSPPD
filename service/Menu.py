@@ -14,14 +14,14 @@ class Menu:
 
 		choice = ''
 		while choice != 'q':
-			print('\n- Main Menù -----------------------')
+			print('\n--------- Main Menù --------------')
 			print('| <1> GREEDY              |')
 			print('| <2> GREEDY_BY_VALUE     |')
 			print('| <3> DESTROY_AND_REPAIR  |')
 			print('| <4> GREEDY_RANDOM       |')
 			print('| <5> GRASP               |')
-			print('-----------------------------------')
-			choice = input('Select an option (q to logout): ')
+			print('------------------------------------')
+			choice = input('Select an option (q to exit): ')
 
 			if choice in {'1', '2', '3', '4', '5'}:
 				if choice == '1':

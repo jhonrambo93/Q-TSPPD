@@ -2,10 +2,10 @@
 
 class AppData:
 
-    # nome file nodes
+    # file nodes name
     file_nodes: str = None
 
-    # nome file transfers
+    # file transfers name
     file_transfers: str = None
 
     # ('id', 'x', 'y', 'q_p', 'q_d')
@@ -41,6 +41,3 @@ class AppData:
 
     # steps length of set_solution
     len_set_solution = []
-
-    # contatore delle ripetizioni della D&R a partire da una Greedy
-    DR_counter = 0
