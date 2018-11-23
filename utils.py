@@ -4,7 +4,8 @@ from transfer.Transfer import Transfer
 import math
 import matplotlib.pylab as plt
 import numpy as np
-
+import random
+import copy
 
 # read nodes files
 def read_nodes_file() -> None:
@@ -251,7 +252,127 @@ def images_sol_generation(solution: list):
 	plt.grid()
 	plt.title('Soluzione')
 	# creazione immagine grafo
-	plt.savefig('images/solution/Soluzione_' + str(len(solution) - 1) + '.png')
+	plt.savefig('images/solution/Final_solution.png')
 	# visualizzazione nel video del grafo
 	# plt.show()
+
+
+def project_file_generation():
+
+	nodes = input("\n\nPlease, insert the number of nodes: ")
+	x_max = input("Please, insert the maximum value for the X coordinate: ")
+	y_max = input("Please, insert the maximum value for the Y coordinate: ")
+
+	if int(x_max) * int(y_max) < int(nodes):
+		print("ERROR: the nodes quantity exceeds in the cartesian plane that you created")
+	else:  # Nodes file
+		file = open("node/n_file/nodesTest.txt", 'w+')
+		couples = []
+		x_deposito = random.randint(int(x_max)*0.4, int(x_max)*0.6)
+		y_deposito = random.randint(int(y_max)*0.4, int(y_max)*0.6)
+		file.write('0 ' + str(x_deposito) + ' ' + str(y_deposito) + '\n')
+		for i in range(1, int(nodes)):
+			file.write(str(i) + ' ')
+			while True:
+				x = random.randint(0, int(x_max))
+				y = random.randint(0, int(y_max))
+				if [x, y] not in couples:
+					couples.append([x, y])
+					break
+			file.write(str(x) + ' ' + str(y) + '\n')
+		file.close()
+
+		# Transfers file
+		file = open("transfer/t_file/transfersTest.txt", 'w+')
+		for i in range(1, int(nodes)):
+			delivery_nodes = []
+			q_tot = 0
+			iteration = 0
+			while iteration < AppData.capacity:  # un modo come un altro di impedire che tutti i nodi abbiano il massimo di quantitÃ  da consegnare
+				candidate_node = random.randint(1, int(nodes) - 1)
+				if candidate_node != i:
+					if candidate_node not in delivery_nodes:
+						quantity = random.randint(1, AppData.capacity)
+						q_tot += quantity
+						if q_tot <= AppData.capacity:
+							delivery_nodes.append(candidate_node)
+							file.write(str(i) + ' ' + str(candidate_node) + ' ' + str(quantity) + '\n')
+						if q_tot == AppData.capacity:  # sono arrivato al limite --> break e cambio nodo
+							break
+				iteration += 1
+			del delivery_nodes
+		file.close()
+
+
+def border_generation(border: list) -> list:
+	for node in AppData.nodes:
+		if node.id != 0 and node.id != AppData.current_node.id and abmissibility_greedy(node, AppData.nodes_in_solution):
+			border.append(node)
+
+	# to avoid deadlock
+	if not border:
+		for node in AppData.nodes:
+			if node.id != AppData.current_node.id and node.q_p != 0:
+				border.append(node)
+	return border
+
+
+# funzione che va a scaricare il furgone
+def scarico_node(step: int, load: int, log_file) -> int:
+
+	unload = False
+	log_file.write('\nFASE DI SCARICO\n')
+	for s in AppData.nodes_in_solution:
+		for t in AppData.transfers:
+			if (t.id_d == AppData.current_node.id) and (t.delivered is False) and (t.id_p == s.id):
+				epsilon = AppData.initial_nodes[t.id_p].q_p - AppData.nodes[t.id_p].q_p
+				if epsilon >= t.q:
+					load = load - t.q
+					AppData.nodes[t.id_p].furgone -= t.q
+					AppData.nodes[AppData.current_node.id].q_d -= t.q
+					AppData.initial_nodes[t.id_p].q_p -= t.q
+					log_file.write('Quantità scaricata = ' + str(t.q) + '\n')
+					t.delivered = True
+					AppData.steps[step].transfers.append(copy.deepcopy(t))  # Update the task of transfers
+					t.q = 0
+					AppData.total_deliveries += 1
+				else:  # if epsilon < t.q
+					load = load - epsilon
+					AppData.nodes[t.id_p].furgone -= epsilon
+					AppData.nodes[AppData.current_node.id].q_d -= epsilon
+					AppData.initial_nodes[t.id_p].q_p -= epsilon
+					t.q -= epsilon
+					# Update the task of transfers:
+					# metto il task in coda ai task dello step
+					AppData.steps[step].transfers.append(copy.deepcopy(t))
+					# al task corrente vado a mettergli il corretto q rimasto
+					AppData.steps[step].transfers[len(AppData.steps[step].transfers) - 1].q = epsilon
+					log_file.write('Quantità scaricata = ' + str(epsilon) + '\n')
+				unload = True
+
+	if not unload:
+		log_file.write('Quantità scaricata = 0 \n')
+
+	return load
+
+
+# funzione che va a caricare il furgone
+def carico_node(step: int, load: int, log_file) -> int:
+
+	log_file.write('FASE DI CARICO' + '\n')
+	load += AppData.current_node.q_p
+	if load <= AppData.capacity:
+		log_file.write('Quantità caricata = ' + str(AppData.nodes[AppData.current_node.id].q_p) + '\n')
+		AppData.steps[step].carico = AppData.nodes[AppData.current_node.id].q_p  # Update carico of step
+		AppData.nodes[AppData.current_node.id].furgone += AppData.nodes[AppData.current_node.id].q_p
+		AppData.nodes[AppData.current_node.id].q_p = 0
+	elif load > AppData.capacity:
+		scarto = load - AppData.capacity
+		load = load - scarto
+		carico = AppData.nodes[AppData.current_node.id].furgone = AppData.nodes[AppData.current_node.id].furgone + (AppData.nodes[AppData.current_node.id].q_p - scarto)
+		AppData.nodes[AppData.current_node.id].q_p = scarto
+		log_file.write('Quantità caricata = ' + str(carico) + '\n')
+		AppData.steps[step].carico = carico  # Update carico of step
+
+	return load
 
