@@ -1,0 +1,439 @@
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 24
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 6
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 44
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 17
+Step selected: 3
+la soluzione è stata peggiorata = 20396.060219222018
+0 284.0 221.0 0 0 0 
+43 258.0 258.0 0 0 0 
+7 458.0 130.0 0 0 0 
+32 223.0 332.0 0 0 0 
+4 138.0 185.0 0 0 0 
+18 358.0 32.0 0 0 0 
+28 430.0 257.0 0 0 0 
+32 223.0 332.0 0 0 0 
+10 206.0 415.0 0 0 0 
+11 371.0 460.0 0 0 0 
+43 258.0 258.0 0 0 0 
+40 114.0 156.0 0 0 0 
+33 1.0 102.0 0 0 0 
+40 114.0 156.0 0 0 0 
+36 187.0 367.0 0 0 0 
+16 185.0 211.0 0 0 0 
+8 321.0 82.0 0 0 0 
+22 260.0 52.0 0 0 0 
+41 467.0 42.0 0 0 0 
+37 193.0 369.0 0 0 0 
+23 357.0 363.0 0 0 0 
+29 333.0 266.0 0 0 0 
+32 223.0 332.0 0 0 0 
+20 52.0 454.0 0 0 0 
+16 185.0 211.0 0 0 0 
+42 418.0 236.0 0 0 0 
+34 331.0 275.0 0 0 0 
+8 321.0 82.0 0 0 0 
+38 436.0 482.0 0 0 0 
+22 260.0 52.0 0 0 0 
+26 188.0 29.0 0 0 0 
+35 30.0 91.0 0 0 0 
+3 102.0 274.0 0 0 0 
+13 233.0 338.0 0 0 0 
+23 357.0 363.0 0 0 0 
+20 52.0 454.0 0 0 0 
+31 343.0 32.0 0 0 0 
+39 302.0 125.0 0 0 0 
+13 233.0 338.0 0 0 0 
+23 357.0 363.0 0 0 0 
+15 340.0 300.0 0 0 0 
+16 185.0 211.0 0 0 0 
+12 184.0 112.0 0 0 0 
+30 35.0 287.0 0 0 0 
+24 479.0 360.0 0 0 0 
+32 223.0 332.0 0 0 0 
+27 207.0 356.0 0 0 0 
+32 223.0 332.0 0 0 0 
+37 193.0 369.0 0 0 0 
+23 357.0 363.0 0 0 0 
+11 371.0 460.0 0 0 0 
+45 333.0 161.0 0 0 0 
+7 458.0 130.0 0 0 0 
+22 260.0 52.0 0 0 0 
+23 357.0 363.0 0 0 0 
+29 333.0 266.0 0 0 0 
+32 223.0 332.0 0 0 0 
+18 358.0 32.0 0 0 0 
+14 353.0 56.0 0 0 0 
+31 343.0 32.0 0 0 0 
+41 467.0 42.0 0 0 0 
+37 193.0 369.0 0 0 0 
+49 194.0 374.0 0 0 0 
+30 35.0 287.0 0 0 0 
+1 21.0 172.0 0 0 0 
+33 1.0 102.0 0 0 0 
+27 207.0 356.0 0 0 0 
+28 430.0 257.0 0 0 0 
+38 436.0 482.0 0 0 0 
+10 206.0 415.0 0 0 0 
+18 358.0 32.0 0 0 0 
+5 327.0 180.0 0 0 0 
+40 114.0 156.0 0 0 0 
+3 102.0 274.0 0 0 0 
+48 80.0 138.0 0 0 0 
+27 207.0 356.0 0 0 0 
+21 108.0 418.0 0 0 0 
+43 258.0 258.0 0 0 0 
+19 332.0 261.0 0 0 0 
+2 128.0 58.0 0 0 0 
+42 418.0 236.0 0 0 0 
+10 206.0 415.0 0 0 0 
+17 127.0 473.0 0 0 0 
+39 302.0 125.0 0 0 0 
+47 275.0 169.0 0 0 0 
+4 138.0 185.0 0 0 0 
+44 50.0 105.0 0 0 0 
+35 30.0 91.0 0 0 0 
+21 108.0 418.0 0 0 0 
+46 45.0 452.0 0 0 0 
+36 187.0 367.0 0 0 0 
+25 276.0 170.0 0 0 0 
+45 333.0 161.0 0 0 0 
+31 343.0 32.0 0 0 0 
+24 479.0 360.0 0 0 0 
+6 98.0 54.0 0 0 0 
+1 21.0 172.0 0 0 0 
+36 187.0 367.0 0 0 0 
+9 40.0 16.0 0 0 0 
+3 102.0 274.0 0 0 0 
+19 332.0 261.0 0 0 0 
+0 284.0 221.0 0 0 0 
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 25
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 54
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 69
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 98
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 72
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 27
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 44
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 96
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 82
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 30
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 36
+Step selected: 49
+la soluzione è stata migliorata = 20359.615207823786
+0 284.0 221.0 0 0 0 
+43 258.0 258.0 0 0 0 
+7 458.0 130.0 0 0 0 
+32 223.0 332.0 0 0 0 
+4 138.0 185.0 0 0 0 
+18 358.0 32.0 0 0 0 
+28 430.0 257.0 0 0 0 
+32 223.0 332.0 0 0 0 
+10 206.0 415.0 0 0 0 
+11 371.0 460.0 0 0 0 
+43 258.0 258.0 0 0 0 
+40 114.0 156.0 0 0 0 
+33 1.0 102.0 0 0 0 
+40 114.0 156.0 0 0 0 
+36 187.0 367.0 0 0 0 
+16 185.0 211.0 0 0 0 
+8 321.0 82.0 0 0 0 
+22 260.0 52.0 0 0 0 
+41 467.0 42.0 0 0 0 
+37 193.0 369.0 0 0 0 
+23 357.0 363.0 0 0 0 
+29 333.0 266.0 0 0 0 
+32 223.0 332.0 0 0 0 
+20 52.0 454.0 0 0 0 
+16 185.0 211.0 0 0 0 
+42 418.0 236.0 0 0 0 
+34 331.0 275.0 0 0 0 
+8 321.0 82.0 0 0 0 
+38 436.0 482.0 0 0 0 
+22 260.0 52.0 0 0 0 
+26 188.0 29.0 0 0 0 
+35 30.0 91.0 0 0 0 
+3 102.0 274.0 0 0 0 
+13 233.0 338.0 0 0 0 
+23 357.0 363.0 0 0 0 
+20 52.0 454.0 0 0 0 
+31 343.0 32.0 0 0 0 
+39 302.0 125.0 0 0 0 
+13 233.0 338.0 0 0 0 
+23 357.0 363.0 0 0 0 
+15 340.0 300.0 0 0 0 
+16 185.0 211.0 0 0 0 
+12 184.0 112.0 0 0 0 
+30 35.0 287.0 0 0 0 
+24 479.0 360.0 0 0 0 
+32 223.0 332.0 0 0 0 
+27 207.0 356.0 0 0 0 
+32 223.0 332.0 0 0 0 
+37 193.0 369.0 0 0 0 
+11 371.0 460.0 0 0 0 
+45 333.0 161.0 0 0 0 
+7 458.0 130.0 0 0 0 
+22 260.0 52.0 0 0 0 
+23 357.0 363.0 0 0 0 
+29 333.0 266.0 0 0 0 
+32 223.0 332.0 0 0 0 
+18 358.0 32.0 0 0 0 
+14 353.0 56.0 0 0 0 
+31 343.0 32.0 0 0 0 
+41 467.0 42.0 0 0 0 
+37 193.0 369.0 0 0 0 
+49 194.0 374.0 0 0 0 
+30 35.0 287.0 0 0 0 
+1 21.0 172.0 0 0 0 
+33 1.0 102.0 0 0 0 
+27 207.0 356.0 0 0 0 
+28 430.0 257.0 0 0 0 
+38 436.0 482.0 0 0 0 
+10 206.0 415.0 0 0 0 
+18 358.0 32.0 0 0 0 
+5 327.0 180.0 0 0 0 
+40 114.0 156.0 0 0 0 
+3 102.0 274.0 0 0 0 
+48 80.0 138.0 0 0 0 
+27 207.0 356.0 0 0 0 
+21 108.0 418.0 0 0 0 
+43 258.0 258.0 0 0 0 
+19 332.0 261.0 0 0 0 
+2 128.0 58.0 0 0 0 
+42 418.0 236.0 0 0 0 
+10 206.0 415.0 0 0 0 
+17 127.0 473.0 0 0 0 
+39 302.0 125.0 0 0 0 
+47 275.0 169.0 0 0 0 
+4 138.0 185.0 0 0 0 
+44 50.0 105.0 0 0 0 
+35 30.0 91.0 0 0 0 
+21 108.0 418.0 0 0 0 
+46 45.0 452.0 0 0 0 
+36 187.0 367.0 0 0 0 
+25 276.0 170.0 0 0 0 
+45 333.0 161.0 0 0 0 
+31 343.0 32.0 0 0 0 
+24 479.0 360.0 0 0 0 
+6 98.0 54.0 0 0 0 
+1 21.0 172.0 0 0 0 
+36 187.0 367.0 0 0 0 
+9 40.0 16.0 0 0 0 
+3 102.0 274.0 0 0 0 
+19 332.0 261.0 0 0 0 
+0 284.0 221.0 0 0 0 
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 6
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 94
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 30
+Step selected: 29
+la soluzione è stata peggiorata = 24155.68934217073
+0 284.0 221.0 0 0 0 
+43 258.0 258.0 0 0 0 
+7 458.0 130.0 0 0 0 
+32 223.0 332.0 0 0 0 
+4 138.0 185.0 0 0 0 
+18 358.0 32.0 0 0 0 
+28 430.0 257.0 0 0 0 
+32 223.0 332.0 0 0 0 
+10 206.0 415.0 0 0 0 
+11 371.0 460.0 0 0 0 
+43 258.0 258.0 0 0 0 
+40 114.0 156.0 0 0 0 
+33 1.0 102.0 0 0 0 
+40 114.0 156.0 0 0 0 
+36 187.0 367.0 0 0 0 
+16 185.0 211.0 0 0 0 
+8 321.0 82.0 0 0 0 
+22 260.0 52.0 0 0 0 
+41 467.0 42.0 0 0 0 
+37 193.0 369.0 0 0 0 
+23 357.0 363.0 0 0 0 
+29 333.0 266.0 0 0 0 
+32 223.0 332.0 0 0 0 
+20 52.0 454.0 0 0 0 
+16 185.0 211.0 0 0 0 
+42 418.0 236.0 0 0 0 
+34 331.0 275.0 0 0 0 
+8 321.0 82.0 0 0 0 
+38 436.0 482.0 0 0 0 
+26 188.0 29.0 0 0 0 
+35 30.0 91.0 0 0 0 
+3 102.0 274.0 0 0 0 
+13 233.0 338.0 0 0 0 
+23 357.0 363.0 0 0 0 
+20 52.0 454.0 0 0 0 
+31 343.0 32.0 0 0 0 
+39 302.0 125.0 0 0 0 
+13 233.0 338.0 0 0 0 
+23 357.0 363.0 0 0 0 
+15 340.0 300.0 0 0 0 
+16 185.0 211.0 0 0 0 
+12 184.0 112.0 0 0 0 
+30 35.0 287.0 0 0 0 
+24 479.0 360.0 0 0 0 
+32 223.0 332.0 0 0 0 
+27 207.0 356.0 0 0 0 
+32 223.0 332.0 0 0 0 
+37 193.0 369.0 0 0 0 
+11 371.0 460.0 0 0 0 
+45 333.0 161.0 0 0 0 
+7 458.0 130.0 0 0 0 
+22 260.0 52.0 0 0 0 
+23 357.0 363.0 0 0 0 
+29 333.0 266.0 0 0 0 
+32 223.0 332.0 0 0 0 
+18 358.0 32.0 0 0 0 
+14 353.0 56.0 0 0 0 
+31 343.0 32.0 0 0 0 
+41 467.0 42.0 0 0 0 
+37 193.0 369.0 0 0 0 
+49 194.0 374.0 0 0 0 
+30 35.0 287.0 0 0 0 
+1 21.0 172.0 0 0 0 
+33 1.0 102.0 0 0 0 
+27 207.0 356.0 0 0 0 
+28 430.0 257.0 0 0 0 
+38 436.0 482.0 0 0 0 
+10 206.0 415.0 0 0 0 
+18 358.0 32.0 0 0 0 
+5 327.0 180.0 0 0 0 
+40 114.0 156.0 0 0 0 
+3 102.0 274.0 0 0 0 
+48 80.0 138.0 0 0 0 
+27 207.0 356.0 0 0 0 
+21 108.0 418.0 0 0 0 
+43 258.0 258.0 0 0 0 
+19 332.0 261.0 0 0 0 
+2 128.0 58.0 0 0 0 
+42 418.0 236.0 0 0 0 
+10 206.0 415.0 0 0 0 
+17 127.0 473.0 0 0 0 
+39 302.0 125.0 0 0 0 
+47 275.0 169.0 0 0 0 
+4 138.0 185.0 0 0 0 
+44 50.0 105.0 0 0 0 
+35 30.0 91.0 0 0 0 
+21 108.0 418.0 0 0 0 
+46 45.0 452.0 0 0 0 
+36 187.0 367.0 0 0 0 
+25 276.0 170.0 0 0 0 
+45 333.0 161.0 0 0 0 
+31 343.0 32.0 0 0 0 
+24 479.0 360.0 0 0 0 
+6 98.0 54.0 0 0 0 
+1 21.0 172.0 0 0 0 
+36 187.0 367.0 0 0 0 
+9 40.0 16.0 0 0 0 
+3 102.0 274.0 0 0 0 
+19 332.0 261.0 0 0 0 
+0 284.0 221.0 0 0 0 
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 88
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 72
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 47
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 43
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 30
+Step selected: 91
+Errore nelle consegne: tasks non ripartizionabili!
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 35
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 80
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 20
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 4
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 45
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 33
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 74
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 61
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 56
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 48
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 9
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 81
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 90
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 83
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 21
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 49
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 17
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 64
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 42
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 14
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 16
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 75
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 55
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 51
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 32
+Step selected: 70
+Errore nelle consegne: tasks non ripartizionabili!
+Step selected: 46
+Errore nelle consegne: tasks non ripartizionabili!
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 92
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 96
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 37
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 66
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 76
+Step selected: 10
+Errore nelle consegne: tasks non ripartizionabili!
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 54
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 3
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 8
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 71
+Step selected: 40
+Errore nelle consegne: tasks non ripartizionabili!
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 95
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 5
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 69
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 58
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 93
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 6
+Step selected: 38
+Errore nelle consegne: tasks non ripartizionabili!
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 41
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 59
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 36
+Step selected: 22
+Errore nelle consegne: tasks non ripartizionabili!
+Step selected: 52
+Errore nelle consegne: tasks non ripartizionabili!
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 23
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 57
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 89
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 82
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 77
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 18
+Step selected: 44
+Errore nelle consegne: tasks non ripartizionabili!
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 25
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 85
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 31
+Step selected: 79
+Errore nelle consegne: tasks non ripartizionabili!
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 19
+Step selected: 24
+Errore nelle consegne: tasks non ripartizionabili!
+Step selected: 13
+Errore nelle consegne: tasks non ripartizionabili!
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 60
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 84
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 86
+Step selected: 34
+Errore nelle consegne: tasks non ripartizionabili!
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 53
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 97
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 28
+Step selected: 50
+Errore nelle consegne: tasks non ripartizionabili!
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 2
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 12
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 11
+Step selected: 7
+Errore nelle consegne: tasks non ripartizionabili!
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 26
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 63
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 27
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 39
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 94
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 15
+Step selected: 67
+Errore nelle consegne: tasks non ripartizionabili!
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 65
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 78
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 73
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 62
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 68
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 29
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 87

@@ -2,6 +2,12 @@
 
 class AppData:
 
+    # boolean variable for files generator
+    testing: bool = False
+
+    # total deliveries counter
+    total_deliveries: int = 0
+
     # file nodes name
     file_nodes: str = None
 
