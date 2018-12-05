@@ -2,6 +2,11 @@
 
 class AppData:
 
+    total_trasfer: int = 0
+
+    # decido se applicare la funzione 1 o 2 per la greedy dy value
+    f_1: bool = True
+
     # boolean variable for files generator
     testing: bool = False
 
@@ -24,7 +29,7 @@ class AppData:
     transfers = []
 
     # capacity vehicle
-    capacity = 5
+    capacity = 100
 
     # quantità effettiva da scaricare
     q_d_n = 0

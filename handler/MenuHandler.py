@@ -260,11 +260,11 @@ class MenuHandler:
 			# Return to the deposit
 			solution.append(AppData.nodes[0])
 			# Show the solution
-			print('\nSOLUTION: ')
-			print('Sequence of node in solution:')
-			for node in solution:
-				print(node)
-			print('\nTotal distance = ' + str(AppData.total_length))
+			# print('\nSOLUTION: ')
+			# print('Sequence of node in solution:')
+			# for node in solution:
+			# print(node)
+			# print('\nTotal distance = ' + str(AppData.total_length))
 
 			# Aggiorno next node del penultimo step (prima del ritorno al deposito)
 			AppData.steps[step].node_next = solution[0]
@@ -316,11 +316,12 @@ class MenuHandler:
 
 			log_file.write('Calcolo delle distanze rispetto i nodi del border ... \n')
 
-			# trovo il nodo migliore con funzione 1
-			# best_n = utils.get_best_node(border, max_value, load)
-
-			# trovo il nodo migliore con la funzione 2
-			best_n = utils.get_best_node_2(border, max_value, load)
+			if AppData.f_1:
+				# trovo il nodo migliore con funzione 1
+				best_n = utils.get_best_node(border, max_value, load)
+			else:
+				# trovo il nodo migliore con la funzione 2
+				best_n = utils.get_best_node_2(border, max_value, load)
 
 			solution.append(best_n)
 			AppData.nodes_in_solution.append(best_n)
@@ -618,7 +619,7 @@ class MenuHandler:
 			GRASP_start_time = time.time()
 
 			# repet for N times:
-			while N < 100:
+			while N < 10:
 				print("Ripetizione Grasp numero: " + str(N))
 				# rum greedy_random 1 volta:
 				MenuHandler.serve(self, 'GREEDY_RANDOM')
@@ -690,7 +691,8 @@ class MenuHandler:
 			while N < 100:
 				print("Ripetizione numero: " + str(N))
 				# rum greedy_random 1 volta:
-				MenuHandler.serve(self, greedy_choice)
+				if N == 0:
+					MenuHandler.serve(self, greedy_choice)
 				# run destroy_and_repair 1 volta:
 				MenuHandler.serve(self, 'DESTROY_AND_REPAIR')
 				# insert result in 2 apposite list:
@@ -699,18 +701,23 @@ class MenuHandler:
 				for len_solution in AppData.len_set_solution:
 					new_len_set_solution.append(len_solution)
 				# vari clear e reset per far ripartire in modo corretto
-				AppData.steps.clear()
-				AppData.nodes_in_solution.clear()
-				AppData.q_d_n = 0
+				# AppData.steps.clear()
+				# AppData.nodes_in_solution.clear()
+				# AppData.q_d_n = 0
 				# AppData.current_node = None
-				AppData.set_solution.clear()
-				AppData.len_set_solution.clear()
+				if len(AppData.set_solution) > 1:
+					k = len(AppData.set_solution)
+					for i in range(1, k-1):
+						del AppData.set_solution[1]
+						del AppData.len_set_solution[1]
+					del AppData.set_solution[1]
+					del AppData.len_set_solution[1]
 				# AppData.initial_nodes.clear()
-				AppData.nodes.clear()
-				utils.read_nodes_file()
-				AppData.transfers.clear()
-				utils.read_transfers_file()
-				utils.upgrade_nodes_list()
+				# AppData.nodes.clear()
+				# utils.read_nodes_file()
+				# AppData.transfers.clear()
+				# utils.read_transfers_file()
+				# utils.upgrade_nodes_list()
 				N += 1
 
 			# avviare una funzione che controllo il risultato migliore e lo faccia vedere a video

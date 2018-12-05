@@ -21,17 +21,26 @@ if __name__ == '__main__':
 	if AppData.testing:
 		# generazione random dei file
 		utils.project_file_generation()
-
-	# read nodes file
-	AppData.file_nodes = 'node/n_file/nodesTest.txt'
-	utils.read_nodes_file()
-
-	# read transfers file
-	AppData.file_transfers = 'transfer/t_file/transfersTest.txt'
-	utils.read_transfers_file()
+		# read nodes file
+		AppData.file_nodes = 'node/n_file/nodesTest.txt'
+		utils.read_nodes_file()
+		# read transfers file
+		AppData.file_transfers = 'transfer/t_file/transfersTest.txt'
+		utils.read_transfers_file()
+	else:
+		# read nodes file
+		AppData.file_nodes = 'node/n_file/nodes.txt'
+		utils.read_nodes_file()
+		# read transfers file
+		AppData.file_transfers = 'transfer/t_file/transfers.txt'
+		utils.read_transfers_file()
 
 	# upgrade nodes list
 	utils.upgrade_nodes_list()
+
+	for node in AppData.nodes:
+		AppData.total_trasfer += node.q_d
+	print(str(AppData.total_trasfer))
 
 	# graph generation
 	all_nodes = AppData.nodes[:]
@@ -63,7 +72,7 @@ if __name__ == '__main__':
 	plt.grid()
 	plt.title('Titolo Grafo')
 	plt.savefig('images/Grafo.png')
-	plt.show()
+	# plt.show()
 
 	Menu(MenuHandler()).show()
 
