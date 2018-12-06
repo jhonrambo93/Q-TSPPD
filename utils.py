@@ -41,7 +41,7 @@ def upgrade_nodes_list() -> None:
 
 
 # Euclidean distance function
-def lenght(node_1: Node, node_2: Node) -> float:
+def length(node_1: Node, node_2: Node) -> float:
 	return math.sqrt((node_1.x - node_2.x) ** 2 + (node_1.y - node_2.y) ** 2)
 
 
@@ -79,7 +79,7 @@ def complete_deliveries(total_deliveries: int) -> bool:
 # funzione che trova il nodo più vicino
 def get_nearest_node(border: list, minimum_length: float) -> Node:
 	for n_f in border:
-		l = lenght(AppData.current_node, n_f)
+		l = length(AppData.current_node, n_f)
 		if minimum_length is None:
 			minimum_length = l
 			nearest_n = n_f
@@ -100,7 +100,7 @@ def get_best_node(border: list, max_value: float, load: int) -> Node:
 		elif value > max_value:
 			max_value = value
 			best_n = n_f
-	AppData.total_length += lenght(AppData.current_node, best_n)
+	AppData.total_length += length(AppData.current_node, best_n)
 	return best_n
 
 
@@ -122,7 +122,7 @@ def get_value(n_f: Node, load: int) -> float:
 		scarto = q - AppData.capacity
 		carico = n_f.q_p - scarto
 
-	return ((load - scarico + carico) / AppData.capacity) / lenght(AppData.current_node, n_f)
+	return ((load - scarico + carico) / AppData.capacity) / length(AppData.current_node, n_f)
 
 
 # funzione che trova il nodo migliore seccondo la funzione get_value_2
@@ -135,7 +135,7 @@ def get_best_node_2(border: list, max_value: float, load: int) -> Node:
 		elif value > max_value:
 			max_value = value
 			best_n = n_f
-	AppData.total_length += lenght(AppData.current_node, best_n)
+	AppData.total_length += length(AppData.current_node, best_n)
 	return best_n
 
 
@@ -167,7 +167,7 @@ def get_value_2(n_f: Node, load: int) -> float:
 	#valore di quanto indide il caricamento completo del furgone
 	furgone_load_value = (load - scarico - carico)/AppData.capacity
 	# distanza tra i nodi
-	distanza = lenght(n_f, AppData.current_node)
+	distanza = length(n_f, AppData.current_node)
 	#valore finale
 	function_value = (transfers_value*1 + furgone_load_value*1)/(distanza*1)
 

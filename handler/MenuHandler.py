@@ -182,7 +182,7 @@ class MenuHandler:
 			# scelta nodo random
 			j = random.randint(0, (len(border) - 1))
 			nearest_n = border[j]
-			AppData.total_length += utils.lenght(AppData.current_node, border[j])
+			AppData.total_length += utils.length(AppData.current_node, border[j])
 			solution.append(nearest_n)
 			AppData.nodes_in_solution.append(nearest_n)
 
@@ -226,7 +226,7 @@ class MenuHandler:
 				# random node
 				j = random.randint(0, (len(border) - 1))
 				nearest_n = border[j]
-				AppData.total_length += utils.lenght(AppData.current_node, border[j])
+				AppData.total_length += utils.length(AppData.current_node, border[j])
 				solution.append(nearest_n)
 				if nearest_n not in AppData.nodes_in_solution:
 					AppData.nodes_in_solution.append(nearest_n)
@@ -474,6 +474,8 @@ class MenuHandler:
 							go = False
 						else:
 							step += 1
+					# operatore destroy
+					# analisi soluzione: verificare presenza di nodi da "distruggere"
 					if destroy_and_repair_steps[j].carico == 0 and utils.is_next_present(j) and destroy_and_repair_steps[j].node_previous.id != destroy_and_repair_steps[j].node_next.id:
 						DR_log_file.write('Step selected: ' + str(j) + '\n')
 						# Metto volanti i task (trasferimenti)
@@ -486,6 +488,7 @@ class MenuHandler:
 									not_delivered += t.q
 						i = j
 						n_over = 0  # step con overload
+						# operatore repair
 						# while che mi permette di ridistribuire i task spachettati dallo step appena distrutto
 						while not_delivered != 0 and i < len(destroy_and_repair_steps) - 1:
 							i += 1
@@ -535,14 +538,14 @@ class MenuHandler:
 						if utils.controllo_consegne():
 							# forse list out of rqnge quindi if AppData.set_solution != 0
 							tot_l = AppData.len_set_solution[x]  # AppData.len_set_solution[len(AppData.len_set_solution) - 1]
-							tot_l -= (utils.lenght(destroy_and_repair_steps[j].node_previous, destroy_and_repair_steps[j].current_node) + (utils.lenght(destroy_and_repair_steps[j].current_node, destroy_and_repair_steps[j].node_next)))
+							tot_l -= (utils.length(destroy_and_repair_steps[j].node_previous, destroy_and_repair_steps[j].current_node) + (utils.length(destroy_and_repair_steps[j].current_node, destroy_and_repair_steps[j].node_next)))
 							if n_over > 0:
-								tot_l += destroy_and_repair_steps[j].overload * (utils.lenght(destroy_and_repair_steps[j].node_previous, destroy_and_repair_steps[j].node_next))
+								tot_l += destroy_and_repair_steps[j].overload * (utils.length(destroy_and_repair_steps[j].node_previous, destroy_and_repair_steps[j].node_next))
 								for step in range(j+1, i):
-									tot_l -= utils.lenght(destroy_and_repair_steps[step].current_node, destroy_and_repair_steps[step].node_next)
-									tot_l += destroy_and_repair_steps[step].overload * (utils.lenght(destroy_and_repair_steps[step].current_node, destroy_and_repair_steps[step].node_next))
+									tot_l -= utils.length(destroy_and_repair_steps[step].current_node, destroy_and_repair_steps[step].node_next)
+									tot_l += destroy_and_repair_steps[step].overload * (utils.length(destroy_and_repair_steps[step].current_node, destroy_and_repair_steps[step].node_next))
 							else:
-								tot_l += (utils.lenght(destroy_and_repair_steps[j].node_previous, destroy_and_repair_steps[j].node_next))
+								tot_l += (utils.length(destroy_and_repair_steps[j].node_previous, destroy_and_repair_steps[j].node_next))
 							if tot_l > AppData.len_set_solution[x]:
 								DR_log_file.write('la soluzione è stata peggiorata = ' + str(tot_l) + '\n')
 								fail += 1  # se arrivo a 3 allora ho un ottimo locale
@@ -570,7 +573,7 @@ class MenuHandler:
 									destroy_and_repair_steps[h].id -= 1
 								destroy_and_repair_steps[j - 1].node_next = destroy_and_repair_steps[j].current_node
 								destroy_and_repair_steps[j].node_previous = destroy_and_repair_steps[j - 1].current_node
-								# Aggiungo la nuova lista i step a set_solution e relativa total_lenght
+								# Aggiungo la nuova lista i step a set_solution e relativa total_length
 								AppData.set_solution.append(destroy_and_repair_steps)
 								AppData.len_set_solution.append(tot_l)
 								# print new solution
