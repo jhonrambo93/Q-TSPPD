@@ -1,261 +1,140 @@
 Step: 1
 Calcolo delle distanze rispetto i nodi del border ... 
-Nodo corrente:2 10.0 7.0 0 6 5 
-Quantit‡ nel furgone: 5
+Nodo corrente:4 2.0 10.0 0 0 2 
+Quantit√† nel furgone: 2
 
 Step: 2
 Nodi frontiera, con i vincoli imposti:
-1 9.0 10.0 5 5 0 
+2 10.0 7.0 2 5 0 
 Calcolo valori funzione rispetto i nodi di border ...
-3 4.0 3.0 5 6 0 
+3 4.0 3.0 4 3 0 
 Calcolo valori funzione rispetto i nodi di border ...
-Nodo scelto: 3 4.0 3.0 5 6 0 
+Nodo scelto: 2 10.0 7.0 2 5 0 
 
 FASE DI SCARICO
-Quantit‡ scaricata = 3
+Quantit√† scaricata = 1
 FASE DI CARICO
-Quantit‡ caricata = 5
+Quantit√† caricata = 2
 
-Quantit‡ nel furgone:7
+Quantit√† nel furgone:3
 Stato consegne: 
  1 2 1 False 
  1 3 2 False 
- 1 4 2 False 
  2 1 2 False 
- 2 3 0 True 
  3 1 1 False 
  3 2 3 False 
- 3 4 1 False 
- 4 2 1 False 
+ 4 2 0 True 
  4 3 1 False 
- 4 2 1 False 
- 4 1 2 False 
 
 Step: 3
 Nodi frontiera, con i vincoli imposti:
-1 9.0 10.0 5 5 0 
+1 9.0 10.0 3 3 0 
 Calcolo valori funzione rispetto i nodi di border ...
-2 10.0 7.0 0 6 2 
+3 4.0 3.0 4 3 0 
 Calcolo valori funzione rispetto i nodi di border ...
-4 2.0 10.0 5 3 0 
-Calcolo valori funzione rispetto i nodi di border ...
-Nodo scelto: 2 10.0 7.0 0 6 2 
+Nodo scelto: 3 4.0 3.0 4 3 0 
 
 FASE DI SCARICO
-Quantit‡ scaricata = 3
+Quantit√† scaricata = 1
 FASE DI CARICO
-Quantit‡ caricata = 0
+Quantit√† caricata = 3
 
-Quantit‡ nel furgone:4
+Quantit√† nel furgone:5
 Stato consegne: 
  1 2 1 False 
  1 3 2 False 
- 1 4 2 False 
  2 1 2 False 
- 2 3 0 True 
  3 1 1 False 
- 3 2 0 True 
- 3 4 1 False 
- 4 2 1 False 
- 4 3 1 False 
- 4 2 1 False 
- 4 1 2 False 
+ 3 2 3 False 
+ 4 2 0 True 
+ 4 3 0 True 
 
 Step: 4
 Nodi frontiera, con i vincoli imposti:
-1 9.0 10.0 5 5 0 
+1 9.0 10.0 3 3 0 
 Calcolo valori funzione rispetto i nodi di border ...
-4 2.0 10.0 5 3 0 
+2 10.0 7.0 0 4 2 
 Calcolo valori funzione rispetto i nodi di border ...
-Nodo scelto: 4 2.0 10.0 5 3 0 
+Nodo scelto: 1 9.0 10.0 3 3 0 
 
 FASE DI SCARICO
-Quantit‡ scaricata = 1
+Quantit√† scaricata = 2
+Quantit√† scaricata = 1
 FASE DI CARICO
-Quantit‡ caricata = 5
+Quantit√† caricata = 3
 
-Quantit‡ nel furgone:8
+Quantit√† nel furgone:5
 Stato consegne: 
  1 2 1 False 
  1 3 2 False 
- 1 4 2 False 
- 2 1 2 False 
- 2 3 0 True 
- 3 1 1 False 
- 3 2 0 True 
- 3 4 0 True 
- 4 2 1 False 
- 4 3 1 False 
- 4 2 1 False 
- 4 1 2 False 
+ 2 1 0 True 
+ 3 1 0 True 
+ 3 2 3 False 
+ 4 2 0 True 
+ 4 3 0 True 
 
 Step: 5
 Nodi frontiera, con i vincoli imposti:
-1 9.0 10.0 5 5 0 
+2 10.0 7.0 0 4 0 
 Calcolo valori funzione rispetto i nodi di border ...
-2 10.0 7.0 0 3 2 
+3 4.0 3.0 1 2 2 
 Calcolo valori funzione rispetto i nodi di border ...
-3 4.0 3.0 0 3 1 
-Calcolo valori funzione rispetto i nodi di border ...
-Nodo scelto: 3 4.0 3.0 0 3 1 
+Nodo scelto: 2 10.0 7.0 0 4 0 
 
 FASE DI SCARICO
-Quantit‡ scaricata = 1
+Quantit√† scaricata = 2
+Quantit√† scaricata = 1
 FASE DI CARICO
-Quantit‡ caricata = 0
+Quantit√† caricata = 0
 
-Quantit‡ nel furgone:7
+Quantit√† nel furgone:2
 Stato consegne: 
- 1 2 1 False 
+ 1 2 0 True 
  1 3 2 False 
- 1 4 2 False 
- 2 1 2 False 
- 2 3 0 True 
- 3 1 1 False 
- 3 2 0 True 
- 3 4 0 True 
- 4 2 1 False 
+ 2 1 0 True 
+ 3 1 0 True 
+ 3 2 1 False 
+ 4 2 0 True 
  4 3 0 True 
- 4 2 1 False 
- 4 1 2 False 
 
 Step: 6
 Nodi frontiera, con i vincoli imposti:
-1 9.0 10.0 5 5 0 
+3 4.0 3.0 1 2 0 
 Calcolo valori funzione rispetto i nodi di border ...
-2 10.0 7.0 0 3 2 
-Calcolo valori funzione rispetto i nodi di border ...
-Nodo scelto: 2 10.0 7.0 0 3 2 
+Nodo scelto: 3 4.0 3.0 1 2 0 
 
 FASE DI SCARICO
-Quantit‡ scaricata = 1
-Quantit‡ scaricata = 1
+Quantit√† scaricata = 2
 FASE DI CARICO
-Quantit‡ caricata = 0
+Quantit√† caricata = 1
 
-Quantit‡ nel furgone:5
+Quantit√† nel furgone:1
 Stato consegne: 
- 1 2 1 False 
- 1 3 2 False 
- 1 4 2 False 
- 2 1 2 False 
- 2 3 0 True 
- 3 1 1 False 
- 3 2 0 True 
- 3 4 0 True 
+ 1 2 0 True 
+ 1 3 0 True 
+ 2 1 0 True 
+ 3 1 0 True 
+ 3 2 1 False 
  4 2 0 True 
  4 3 0 True 
- 4 2 0 True 
- 4 1 2 False 
 
 Step: 7
 Nodi frontiera, con i vincoli imposti:
-1 9.0 10.0 5 5 0 
-Calcolo valori funzione rispetto i nodi di border ...
-Nodo scelto: 1 9.0 10.0 5 5 0 
-
-FASE DI SCARICO
-Quantit‡ scaricata = 2
-Quantit‡ scaricata = 1
-Quantit‡ scaricata = 2
-FASE DI CARICO
-Quantit‡ caricata = 5
-
-Quantit‡ nel furgone:5
-Stato consegne: 
- 1 2 1 False 
- 1 3 2 False 
- 1 4 2 False 
- 2 1 0 True 
- 2 3 0 True 
- 3 1 0 True 
- 3 2 0 True 
- 3 4 0 True 
- 4 2 0 True 
- 4 3 0 True 
- 4 2 0 True 
- 4 1 0 True 
-
-Step: 8
-Nodi frontiera, con i vincoli imposti:
 2 10.0 7.0 0 1 0 
-Calcolo valori funzione rispetto i nodi di border ...
-3 4.0 3.0 0 2 0 
-Calcolo valori funzione rispetto i nodi di border ...
-4 2.0 10.0 0 2 0 
 Calcolo valori funzione rispetto i nodi di border ...
 Nodo scelto: 2 10.0 7.0 0 1 0 
 
 FASE DI SCARICO
-Quantit‡ scaricata = 1
+Quantit√† scaricata = 1
 FASE DI CARICO
-Quantit‡ caricata = 0
+Quantit√† caricata = 0
 
-Quantit‡ nel furgone:4
-Stato consegne: 
- 1 2 0 True 
- 1 3 2 False 
- 1 4 2 False 
- 2 1 0 True 
- 2 3 0 True 
- 3 1 0 True 
- 3 2 0 True 
- 3 4 0 True 
- 4 2 0 True 
- 4 3 0 True 
- 4 2 0 True 
- 4 1 0 True 
-
-Step: 9
-Nodi frontiera, con i vincoli imposti:
-3 4.0 3.0 0 2 0 
-Calcolo valori funzione rispetto i nodi di border ...
-4 2.0 10.0 0 2 0 
-Calcolo valori funzione rispetto i nodi di border ...
-Nodo scelto: 3 4.0 3.0 0 2 0 
-
-FASE DI SCARICO
-Quantit‡ scaricata = 2
-FASE DI CARICO
-Quantit‡ caricata = 0
-
-Quantit‡ nel furgone:2
+Quantit√† nel furgone:0
 Stato consegne: 
  1 2 0 True 
  1 3 0 True 
- 1 4 2 False 
  2 1 0 True 
- 2 3 0 True 
  3 1 0 True 
  3 2 0 True 
- 3 4 0 True 
  4 2 0 True 
  4 3 0 True 
- 4 2 0 True 
- 4 1 0 True 
-
-Step: 10
-Nodi frontiera, con i vincoli imposti:
-4 2.0 10.0 0 2 0 
-Calcolo valori funzione rispetto i nodi di border ...
-Nodo scelto: 4 2.0 10.0 0 2 0 
-
-FASE DI SCARICO
-Quantit‡ scaricata = 2
-FASE DI CARICO
-Quantit‡ caricata = 0
-
-Quantit‡ nel furgone:0
-Stato consegne: 
- 1 2 0 True 
- 1 3 0 True 
- 1 4 0 True 
- 2 1 0 True 
- 2 3 0 True 
- 3 1 0 True 
- 3 2 0 True 
- 3 4 0 True 
- 4 2 0 True 
- 4 3 0 True 
- 4 2 0 True 
- 4 1 0 True 

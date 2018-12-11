@@ -32,7 +32,7 @@ if __name__ == '__main__':
 		AppData.file_nodes = 'node/n_file/nodes.txt'
 		utils.read_nodes_file()
 		# read transfers file
-		AppData.file_transfers = 'transfer/t_file/transfers.txt'
+		AppData.file_transfers = 'transfer/t_file/transfers0.txt'
 		utils.read_transfers_file()
 
 	# upgrade nodes list
