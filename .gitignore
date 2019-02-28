@@ -1,0 +1,4 @@
+# ios pycharm files
+.DS_Store
+.idea
+.__pycache__

@@ -1,0 +1,11 @@
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 8
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 9
+Step selected: 6
+Errore nelle consegne: tasks non ripartizionabili!
+Step selected: 5
+Errore nelle consegne: tasks non ripartizionabili!
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 7
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 2
+Non è possibile effettuare miglioramenti a partire dalla soluzione eliminando lo step: 4
+Step selected: 3
+Errore nelle consegne: tasks non ripartizionabili!

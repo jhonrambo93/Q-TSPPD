@@ -1,0 +1,140 @@
+Step: 1
+Calcolo delle distanze rispetto i nodi del border ... 
+Nodo corrente:4 2.0 10.0 0 0 2 
+Quantità nel furgone: 2
+
+Step: 2
+Nodi frontiera, con i vincoli imposti:
+2 10.0 7.0 2 5 0 
+Calcolo valori funzione rispetto i nodi di border ...
+3 4.0 3.0 4 3 0 
+Calcolo valori funzione rispetto i nodi di border ...
+Nodo scelto: 2 10.0 7.0 2 5 0 
+
+FASE DI SCARICO
+Quantità scaricata = 1
+FASE DI CARICO
+Quantità caricata = 2
+
+Quantità nel furgone:3
+Stato consegne: 
+ 1 2 1 False 
+ 1 3 2 False 
+ 2 1 2 False 
+ 3 1 1 False 
+ 3 2 3 False 
+ 4 2 0 True 
+ 4 3 1 False 
+
+Step: 3
+Nodi frontiera, con i vincoli imposti:
+1 9.0 10.0 3 3 0 
+Calcolo valori funzione rispetto i nodi di border ...
+3 4.0 3.0 4 3 0 
+Calcolo valori funzione rispetto i nodi di border ...
+Nodo scelto: 3 4.0 3.0 4 3 0 
+
+FASE DI SCARICO
+Quantità scaricata = 1
+FASE DI CARICO
+Quantità caricata = 3
+
+Quantità nel furgone:5
+Stato consegne: 
+ 1 2 1 False 
+ 1 3 2 False 
+ 2 1 2 False 
+ 3 1 1 False 
+ 3 2 3 False 
+ 4 2 0 True 
+ 4 3 0 True 
+
+Step: 4
+Nodi frontiera, con i vincoli imposti:
+1 9.0 10.0 3 3 0 
+Calcolo valori funzione rispetto i nodi di border ...
+2 10.0 7.0 0 4 2 
+Calcolo valori funzione rispetto i nodi di border ...
+Nodo scelto: 1 9.0 10.0 3 3 0 
+
+FASE DI SCARICO
+Quantità scaricata = 2
+Quantità scaricata = 1
+FASE DI CARICO
+Quantità caricata = 3
+
+Quantità nel furgone:5
+Stato consegne: 
+ 1 2 1 False 
+ 1 3 2 False 
+ 2 1 0 True 
+ 3 1 0 True 
+ 3 2 3 False 
+ 4 2 0 True 
+ 4 3 0 True 
+
+Step: 5
+Nodi frontiera, con i vincoli imposti:
+2 10.0 7.0 0 4 0 
+Calcolo valori funzione rispetto i nodi di border ...
+3 4.0 3.0 1 2 2 
+Calcolo valori funzione rispetto i nodi di border ...
+Nodo scelto: 2 10.0 7.0 0 4 0 
+
+FASE DI SCARICO
+Quantità scaricata = 2
+Quantità scaricata = 1
+FASE DI CARICO
+Quantità caricata = 0
+
+Quantità nel furgone:2
+Stato consegne: 
+ 1 2 0 True 
+ 1 3 2 False 
+ 2 1 0 True 
+ 3 1 0 True 
+ 3 2 1 False 
+ 4 2 0 True 
+ 4 3 0 True 
+
+Step: 6
+Nodi frontiera, con i vincoli imposti:
+3 4.0 3.0 1 2 0 
+Calcolo valori funzione rispetto i nodi di border ...
+Nodo scelto: 3 4.0 3.0 1 2 0 
+
+FASE DI SCARICO
+Quantità scaricata = 2
+FASE DI CARICO
+Quantità caricata = 1
+
+Quantità nel furgone:1
+Stato consegne: 
+ 1 2 0 True 
+ 1 3 0 True 
+ 2 1 0 True 
+ 3 1 0 True 
+ 3 2 1 False 
+ 4 2 0 True 
+ 4 3 0 True 
+
+Step: 7
+Nodi frontiera, con i vincoli imposti:
+2 10.0 7.0 0 1 0 
+Calcolo valori funzione rispetto i nodi di border ...
+Nodo scelto: 2 10.0 7.0 0 1 0 
+
+FASE DI SCARICO
+Quantità scaricata = 1
+FASE DI CARICO
+Quantità caricata = 0
+
+Quantità nel furgone:0
+Stato consegne: 
+ 1 2 0 True 
+ 1 3 0 True 
+ 2 1 0 True 
+ 3 1 0 True 
+ 3 2 0 True 
+ 4 2 0 True 
+ 4 3 0 True 
